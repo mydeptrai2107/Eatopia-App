@@ -1,34 +1,77 @@
 {
   "project_info": {
-    "project_number": "554913286574",
-    "project_id": "eatopia-ebd28",
-    "storage_bucket": "eatopia-ebd28.appspot.com"
+    "project_number": "562134379208",
+    "project_id": "doanchuyennganh-65edf",
+    "storage_bucket": "doanchuyennganh-65edf.firebasestorage.app"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:554913286574:android:231b40afc053b501c9203f",
+        "mobilesdk_app_id": "1:562134379208:android:fe9b5bfc33a1d5ea4f93fd",
         "android_client_info": {
-          "package_name": "com.example.eatopia"
+          "package_name": "com.example.car_rental_app"
         }
       },
       "oauth_client": [
         {
-          "client_id": "554913286574-l6k6trlo947ku0vsc44bg613s1879e7f.apps.googleusercontent.com",
+          "client_id": "562134379208-itqhc3cbrcpm9l3jeci2gcrbcnmm8v5j.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyAW4CPB0fLh-Yi_ib5PsreFG3GvFnWa7rI"
+          "current_key": "AIzaSyDrEejAmvE_v5aX4a5NdKWU9W7NTh8r5Qc"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "554913286574-l6k6trlo947ku0vsc44bg613s1879e7f.apps.googleusercontent.com",
+              "client_id": "562134379208-itqhc3cbrcpm9l3jeci2gcrbcnmm8v5j.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "562134379208-c13l73bfd9es5kg62eo9dh2ivvgqbjfl.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.carRentalApp"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:562134379208:android:ad84e9e6b1d249684f93fd",
+        "android_client_info": {
+          "package_name": "com.example.eatopia"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "562134379208-itqhc3cbrcpm9l3jeci2gcrbcnmm8v5j.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDrEejAmvE_v5aX4a5NdKWU9W7NTh8r5Qc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "562134379208-itqhc3cbrcpm9l3jeci2gcrbcnmm8v5j.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "562134379208-c13l73bfd9es5kg62eo9dh2ivvgqbjfl.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.carRentalApp"
+              }
             }
           ]
         }

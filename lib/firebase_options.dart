@@ -17,10 +17,7 @@ import 'package:flutter/foundation.dart'
 class DefaultFirebaseOptions {
   static FirebaseOptions get currentPlatform {
     if (kIsWeb) {
-      throw UnsupportedError(
-        'DefaultFirebaseOptions have not been configured for web - '
-        'you can reconfigure this by running the FlutterFire CLI again.',
-      );
+      return web;
     }
     switch (defaultTargetPlatform) {
       case TargetPlatform.android:
@@ -36,10 +33,7 @@ class DefaultFirebaseOptions {
           'you can reconfigure this by running the FlutterFire CLI again.',
         );
       case TargetPlatform.windows:
-        throw UnsupportedError(
-          'DefaultFirebaseOptions have not been configured for windows - '
-          'you can reconfigure this by running the FlutterFire CLI again.',
-        );
+        return windows;
       case TargetPlatform.linux:
         throw UnsupportedError(
           'DefaultFirebaseOptions have not been configured for linux - '
@@ -53,10 +47,31 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyAW4CPB0fLh-Yi_ib5PsreFG3GvFnWa7rI',
-    appId: '1:554913286574:android:231b40afc053b501c9203f',
-    messagingSenderId: '554913286574',
-    projectId: 'eatopia-ebd28',
-    storageBucket: 'eatopia-ebd28.appspot.com',
+    apiKey: 'AIzaSyDrEejAmvE_v5aX4a5NdKWU9W7NTh8r5Qc',
+    appId: '1:562134379208:android:ad84e9e6b1d249684f93fd',
+    messagingSenderId: '562134379208',
+    projectId: 'doanchuyennganh-65edf',
+    storageBucket: 'doanchuyennganh-65edf.firebasestorage.app',
   );
+
+  static const FirebaseOptions web = FirebaseOptions(
+    apiKey: 'AIzaSyCPNq7kboTi9OdOAM6GTzVw2KOlhqzQTNM',
+    appId: '1:562134379208:web:70f118acdff9dc514f93fd',
+    messagingSenderId: '562134379208',
+    projectId: 'doanchuyennganh-65edf',
+    authDomain: 'doanchuyennganh-65edf.firebaseapp.com',
+    storageBucket: 'doanchuyennganh-65edf.firebasestorage.app',
+    measurementId: 'G-5W15382LYH',
+  );
+
+  static const FirebaseOptions windows = FirebaseOptions(
+    apiKey: 'AIzaSyCPNq7kboTi9OdOAM6GTzVw2KOlhqzQTNM',
+    appId: '1:562134379208:web:c6004e52c8c571aa4f93fd',
+    messagingSenderId: '562134379208',
+    projectId: 'doanchuyennganh-65edf',
+    authDomain: 'doanchuyennganh-65edf.firebaseapp.com',
+    storageBucket: 'doanchuyennganh-65edf.firebasestorage.app',
+    measurementId: 'G-WH1Y0C3C0W',
+  );
+
 }
