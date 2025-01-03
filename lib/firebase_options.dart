@@ -47,31 +47,32 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyDrEejAmvE_v5aX4a5NdKWU9W7NTh8r5Qc',
-    appId: '1:562134379208:android:ad84e9e6b1d249684f93fd',
-    messagingSenderId: '562134379208',
-    projectId: 'doanchuyennganh-65edf',
-    storageBucket: 'doanchuyennganh-65edf.firebasestorage.app',
+    apiKey: 'AIzaSyCIKm7rmwCwvvfpjLePBbNFWcPp09O9_I4',
+    appId: '1:1081067066927:android:eae86a777fe34df9f318da',
+    messagingSenderId: '1081067066927',
+    projectId: 'diary1915-878fd',
+    databaseURL: 'https://diary1915-878fd-default-rtdb.firebaseio.com',
+    storageBucket: 'diary1915-878fd.appspot.com',
   );
 
   static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyCPNq7kboTi9OdOAM6GTzVw2KOlhqzQTNM',
-    appId: '1:562134379208:web:70f118acdff9dc514f93fd',
-    messagingSenderId: '562134379208',
-    projectId: 'doanchuyennganh-65edf',
-    authDomain: 'doanchuyennganh-65edf.firebaseapp.com',
-    storageBucket: 'doanchuyennganh-65edf.firebasestorage.app',
-    measurementId: 'G-5W15382LYH',
+    apiKey: 'AIzaSyBtDQDAaPUQ8wcUwO--_dMBOsNjTiIDZns',
+    appId: '1:1081067066927:web:d613abef8628b7a2f318da',
+    messagingSenderId: '1081067066927',
+    projectId: 'diary1915-878fd',
+    authDomain: 'diary1915-878fd.firebaseapp.com',
+    databaseURL: 'https://diary1915-878fd-default-rtdb.firebaseio.com',
+    storageBucket: 'diary1915-878fd.appspot.com',
   );
 
   static const FirebaseOptions windows = FirebaseOptions(
-    apiKey: 'AIzaSyCPNq7kboTi9OdOAM6GTzVw2KOlhqzQTNM',
-    appId: '1:562134379208:web:c6004e52c8c571aa4f93fd',
-    messagingSenderId: '562134379208',
-    projectId: 'doanchuyennganh-65edf',
-    authDomain: 'doanchuyennganh-65edf.firebaseapp.com',
-    storageBucket: 'doanchuyennganh-65edf.firebasestorage.app',
-    measurementId: 'G-WH1Y0C3C0W',
+    apiKey: 'AIzaSyBtDQDAaPUQ8wcUwO--_dMBOsNjTiIDZns',
+    appId: '1:1081067066927:web:a69dc0a4b5cb0b45f318da',
+    messagingSenderId: '1081067066927',
+    projectId: 'diary1915-878fd',
+    authDomain: 'diary1915-878fd.firebaseapp.com',
+    databaseURL: 'https://diary1915-878fd-default-rtdb.firebaseio.com',
+    storageBucket: 'diary1915-878fd.appspot.com',
   );
 
 }
