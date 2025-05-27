@@ -8,8 +8,8 @@ import 'package:eatopia/utilities/order_item.dart';
 import 'package:flutter/material.dart';
 
 class CheckoutPage extends StatefulWidget {
-  CheckoutPage({super.key, required this.userData});
-  Map<String, dynamic> userData;
+  const CheckoutPage({super.key, required this.userData});
+  final Map<String, dynamic> userData;
 
   @override
   State<CheckoutPage> createState() => _CheckoutPageState();
@@ -17,6 +17,7 @@ class CheckoutPage extends StatefulWidget {
 
 class _CheckoutPageState extends State<CheckoutPage> {
   bool isLoading = false;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

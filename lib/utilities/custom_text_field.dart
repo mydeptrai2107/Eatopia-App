@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class CustomTextField extends StatefulWidget {
-  CustomTextField({
+  const CustomTextField({
     super.key,
     required this.emailController,
     required this.boxH,
@@ -15,11 +15,11 @@ class CustomTextField extends StatefulWidget {
   }) : _primaryColor = primaryColor;
 
   final TextEditingController emailController;
-  double boxH;
+  final double boxH;
   final Color _primaryColor;
   final String hintText;
   final String labelText;
-  String? Function(String?)? validator;
+  final String? Function(String?)? validator;
   final Icon? icon;
   final TextInputType inputType;
   final bool readOnly;

@@ -4,12 +4,13 @@ import 'package:flutter/material.dart';
 import 'package:shimmer_animation/shimmer_animation.dart';
 
 class CustomTile extends StatelessWidget {
-  const CustomTile(
-      {super.key,
-      required this.heading,
-      required this.description,
-      required this.icon,
-      this.size = const Size(150, 170)});
+  const CustomTile({
+    super.key,
+    required this.heading,
+    required this.description,
+    required this.icon,
+    this.size = const Size(150, 170),
+  });
 
   final String heading;
   final String description;

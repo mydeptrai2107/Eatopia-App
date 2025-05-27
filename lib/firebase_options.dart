@@ -23,10 +23,7 @@ class DefaultFirebaseOptions {
       case TargetPlatform.android:
         return android;
       case TargetPlatform.iOS:
-        throw UnsupportedError(
-          'DefaultFirebaseOptions have not been configured for ios - '
-          'you can reconfigure this by running the FlutterFire CLI again.',
-        );
+        return ios;
       case TargetPlatform.macOS:
         throw UnsupportedError(
           'DefaultFirebaseOptions have not been configured for macos - '
@@ -47,22 +44,21 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyCIKm7rmwCwvvfpjLePBbNFWcPp09O9_I4',
-    appId: '1:1081067066927:android:eae86a777fe34df9f318da',
-    messagingSenderId: '1081067066927',
-    projectId: 'diary1915-878fd',
-    databaseURL: 'https://diary1915-878fd-default-rtdb.firebaseio.com',
-    storageBucket: 'diary1915-878fd.appspot.com',
+    apiKey: 'AIzaSyCv8zVAMULVY16F4VqScNZ1xKfkKZ2gzyo',
+    appId: '1:667227505341:android:4d2a54d572d678ba462dd4',
+    messagingSenderId: '667227505341',
+    projectId: 'fir-6b182',
+    storageBucket: 'fir-6b182.appspot.com',
   );
 
   static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyBtDQDAaPUQ8wcUwO--_dMBOsNjTiIDZns',
-    appId: '1:1081067066927:web:d613abef8628b7a2f318da',
-    messagingSenderId: '1081067066927',
-    projectId: 'diary1915-878fd',
-    authDomain: 'diary1915-878fd.firebaseapp.com',
-    databaseURL: 'https://diary1915-878fd-default-rtdb.firebaseio.com',
-    storageBucket: 'diary1915-878fd.appspot.com',
+    apiKey: 'AIzaSyBn67mB44d7yltClQ7ZK5ERszqRQnfWALU',
+    appId: '1:667227505341:web:792c073ce2b769ea462dd4',
+    messagingSenderId: '667227505341',
+    projectId: 'fir-6b182',
+    authDomain: 'fir-6b182.firebaseapp.com',
+    storageBucket: 'fir-6b182.appspot.com',
+    measurementId: 'G-1KCVNXPKB5',
   );
 
   static const FirebaseOptions windows = FirebaseOptions(
@@ -73,6 +69,15 @@ class DefaultFirebaseOptions {
     authDomain: 'diary1915-878fd.firebaseapp.com',
     databaseURL: 'https://diary1915-878fd-default-rtdb.firebaseio.com',
     storageBucket: 'diary1915-878fd.appspot.com',
+  );
+
+  static const FirebaseOptions ios = FirebaseOptions(
+    apiKey: 'AIzaSyC8LWECzqQ8Bmu7tVj6D0zQc93gyeAp2RQ',
+    appId: '1:667227505341:ios:184d1453b002101c462dd4',
+    messagingSenderId: '667227505341',
+    projectId: 'fir-6b182',
+    storageBucket: 'fir-6b182.appspot.com',
+    iosBundleId: 'com.example.eatopia',
   );
 
 }
