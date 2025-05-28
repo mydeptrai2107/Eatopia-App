@@ -12,7 +12,7 @@ class _TermsPolicyState extends State<TermsPolicy> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Terms and Policy'),
+        title: const Text('Điều Khoản và Chính Sách'),
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -21,7 +21,7 @@ class _TermsPolicyState extends State<TermsPolicy> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: const <Widget>[
               Text(
-                'Terms of Service',
+                'Điều Khoản Dịch Vụ',
                 style: TextStyle(
                   fontSize: 20.0,
                   fontWeight: FontWeight.bold,
@@ -29,71 +29,71 @@ class _TermsPolicyState extends State<TermsPolicy> {
               ),
               SizedBox(height: 16.0),
               Text(
-                '1. Introduction',
+                '1. Giới thiệu',
                 style: TextStyle(fontWeight: FontWeight.bold),
               ),
               Text(
-                'Welcome to our food ordering and hotel reservation app. By using our app, you agree to these Terms of Service.\n',
+                'Chào mừng bạn đến với ứng dụng đặt đồ ăn và đặt phòng khách sạn của chúng tôi. Bằng việc sử dụng ứng dụng, bạn đồng ý với các điều khoản dịch vụ này.\n',
               ),
               Text(
-                '2. Use of Our App',
+                '2. Sử dụng Ứng Dụng',
                 style: TextStyle(fontWeight: FontWeight.bold),
               ),
               Text(
-                'Our app is for personal and non-commercial use only. You agree not to use our app for any illegal or unauthorized purpose.\n',
+                'Ứng dụng của chúng tôi chỉ dành cho mục đích cá nhân và phi thương mại. Bạn đồng ý không sử dụng ứng dụng cho bất kỳ mục đích bất hợp pháp hoặc trái phép nào.\n',
               ),
               Text(
-                '3. Ordering Food',
+                '3. Đặt Đồ Ăn',
                 style: TextStyle(fontWeight: FontWeight.bold),
               ),
               Text(
-                'You may order food through our app from participating restaurants. We do not guarantee the availability or quality of the food ordered through our app, nor do we guarantee the accuracy of any restaurant information displayed on our app. Any issues with the food ordered through our app should be addressed directly with the restaurant.\n',
+                'Bạn có thể đặt đồ ăn từ các nhà hàng đối tác thông qua ứng dụng. Chúng tôi không đảm bảo chất lượng hoặc tính sẵn có của món ăn, cũng như thông tin hiển thị về nhà hàng. Mọi vấn đề liên quan đến món ăn nên được liên hệ trực tiếp với nhà hàng.\n',
               ),
               Text(
-                '4. Hotel Reservations',
+                '4. Đặt Phòng Khách Sạn',
                 style: TextStyle(fontWeight: FontWeight.bold),
               ),
               Text(
-                'You may make pre-reservations for hotel rooms through our app. We do not guarantee the availability or quality of the hotel rooms reserved through our app, nor do we guarantee the accuracy of any hotel information displayed on our app. Any issues with the hotel reservation should be addressed directly with the hotel.\n',
+                'Bạn có thể đặt trước phòng khách sạn thông qua ứng dụng. Chúng tôi không đảm bảo chất lượng hoặc tính sẵn có của phòng khách sạn, cũng như độ chính xác của thông tin hiển thị. Mọi vấn đề phát sinh nên liên hệ trực tiếp với khách sạn.\n',
               ),
               Text(
-                '5. User Content',
+                '5. Nội Dung Người Dùng',
                 style: TextStyle(fontWeight: FontWeight.bold),
               ),
               Text(
-                'You are solely responsible for any content that you post or transmit through our app. You agree not to post or transmit any content that is illegal, defamatory, or infringes on any third party\'s intellectual property rights.\n',
+                'Bạn chịu trách nhiệm hoàn toàn cho mọi nội dung đăng tải hoặc truyền tải qua ứng dụng. Bạn đồng ý không đăng tải nội dung vi phạm pháp luật, phỉ báng hoặc vi phạm quyền sở hữu trí tuệ của bên thứ ba.\n',
               ),
               Text(
-                '6. Intellectual Property',
+                '6. Quyền Sở Hữu Trí Tuệ',
                 style: TextStyle(fontWeight: FontWeight.bold),
               ),
               Text(
-                'All intellectual property rights in our app, including but not limited to trademarks, logos, and copyrights, are owned by us or our licensors. You may not use any of our intellectual property without our prior written consent.\n',
+                'Tất cả các quyền sở hữu trí tuệ liên quan đến ứng dụng, bao gồm nhãn hiệu, biểu tượng, bản quyền... đều thuộc về chúng tôi hoặc bên cấp phép. Bạn không được sử dụng các tài sản trí tuệ này nếu không có sự cho phép bằng văn bản.\n',
               ),
               Text(
-                '7. Limitation of Liability',
+                '7. Giới Hạn Trách Nhiệm',
                 style: TextStyle(fontWeight: FontWeight.bold),
               ),
               Text(
-                'We are not liable for any indirect, incidental, or consequential damages arising out of your use of our app, including but not limited to lost profits, lost data, or business interruption.\n',
+                'Chúng tôi không chịu trách nhiệm với bất kỳ thiệt hại gián tiếp, ngẫu nhiên hoặc hệ quả nào phát sinh từ việc sử dụng ứng dụng, bao gồm nhưng không giới hạn ở mất lợi nhuận, mất dữ liệu hoặc gián đoạn kinh doanh.\n',
               ),
               Text(
-                '8. Termination',
+                '8. Chấm Dứt',
                 style: TextStyle(fontWeight: FontWeight.bold),
               ),
               Text(
-                'We may terminate your use of our app at any time, without notice or liability.\n',
+                'Chúng tôi có thể chấm dứt quyền truy cập ứng dụng của bạn bất kỳ lúc nào mà không cần thông báo.\n',
               ),
               Text(
-                '9. Governing Law',
+                '9. Luật Áp Dụng',
                 style: TextStyle(fontWeight: FontWeight.bold),
               ),
               Text(
-                'These Terms of Service shall be governed by and construed in accordance with the laws of Pakistan. Any disputes arising out of these Terms of Service shall be resolved exclusively in the courts of Pakistan.\n',
+                'Các điều khoản này được điều chỉnh theo luật pháp của Pakistan. Mọi tranh chấp sẽ được giải quyết tại tòa án Pakistan.\n',
               ),
               SizedBox(height: 16.0),
               Text(
-                'Privacy Policy',
+                'Chính Sách Quyền Riêng Tư',
                 style: TextStyle(
                   fontSize: 20.0,
                   fontWeight: FontWeight.bold,
@@ -101,60 +101,60 @@ class _TermsPolicyState extends State<TermsPolicy> {
               ),
               SizedBox(height: 16.0),
               Text(
-                '1. Introduction',
+                '1. Giới thiệu',
                 style: TextStyle(fontWeight: FontWeight.bold),
               ),
               Text(
-                'We are committed to protecting your privacy. This Privacy Policy explains how we collect, use, and disclose your personal information.\n',
+                'Chúng tôi cam kết bảo vệ quyền riêng tư của bạn. Chính sách này giải thích cách chúng tôi thu thập, sử dụng và chia sẻ thông tin cá nhân của bạn.\n',
               ),
               Text(
-                '2. Collection of Personal Information',
+                '2. Thu Thập Thông Tin Cá Nhân',
                 style: TextStyle(fontWeight: FontWeight.bold),
               ),
               Text(
-                'We collect personal information, such as your name, email address, and phone number, when you register for our app or make an order or reservation through our app.\n',
+                'Chúng tôi thu thập thông tin như tên, email, số điện thoại khi bạn đăng ký hoặc sử dụng các dịch vụ đặt đồ ăn/đặt phòng.\n',
               ),
               Text(
-                '3. Use of Personal Information',
+                '3. Sử Dụng Thông Tin Cá Nhân',
                 style: TextStyle(fontWeight: FontWeight.bold),
               ),
               Text(
-                'We use your personal information to provide you with the services offered through our app, such as processing your orders and reservations. We may also use your personal information to send you promotional emails or messages about our app.\n',
+                'Chúng tôi sử dụng thông tin để cung cấp dịch vụ, xử lý đơn hàng và gửi thông báo khuyến mãi nếu bạn đồng ý.\n',
               ),
               Text(
-                '4. Disclosure of Personal Information',
+                '4. Chia Sẻ Thông Tin Cá Nhân',
                 style: TextStyle(fontWeight: FontWeight.bold),
               ),
               Text(
-                'We may disclose your personal information to our partners or service providers who help us provide the services offered through our app. We may also disclose your personal information if required by law.\n',
+                'Chúng tôi có thể chia sẻ thông tin với đối tác hoặc nhà cung cấp dịch vụ hỗ trợ hoạt động của ứng dụng. Thông tin cũng có thể được chia sẻ nếu pháp luật yêu cầu.\n',
               ),
               Text(
-                '5. Security of Personal Information',
+                '5. Bảo Mật Thông Tin Cá Nhân',
                 style: TextStyle(fontWeight: FontWeight.bold),
               ),
               Text(
-                'We take reasonable measures to protect your personal information from unauthorized access, disclosure, or misuse.\n',
+                'Chúng tôi áp dụng các biện pháp hợp lý để bảo vệ thông tin cá nhân khỏi truy cập trái phép hoặc rò rỉ dữ liệu.\n',
               ),
               Text(
-                '6. Retention of Personal Information',
+                '6. Lưu Trữ Thông Tin Cá Nhân',
                 style: TextStyle(fontWeight: FontWeight.bold),
               ),
               Text(
-                'We will retain your personal information for as long as necessary to provide you with the services offered through our app, or as required by law.\n',
+                'Chúng tôi lưu trữ thông tin cá nhân trong thời gian cần thiết để cung cấp dịch vụ hoặc theo yêu cầu pháp luật.\n',
               ),
               Text(
-                '7. Changes to Privacy Policy',
+                '7. Thay Đổi Chính Sách',
                 style: TextStyle(fontWeight: FontWeight.bold),
               ),
               Text(
-                'We may change this Privacy Policy at any time, without notice to you. We encourage you to review this Privacy Policy regularly.\n',
+                'Chúng tôi có thể thay đổi chính sách này mà không cần thông báo trước. Vui lòng kiểm tra thường xuyên để cập nhật.\n',
               ),
               Text(
-                '8. Use of Personal Info',
+                '8. Sử Dụng Thông Tin Cá Nhân',
                 style: TextStyle(fontWeight: FontWeight.bold),
               ),
               Text(
-                'By agreeing to our Terms and Policies you are agreeing that we can use your personal information to any extent, even sell it to another person and you can\'t object it or you don\'t have any other authorities. Also, by using our app, you will become our slave.\n',
+                'Bằng việc sử dụng ứng dụng, bạn đồng ý để chúng tôi sử dụng thông tin cá nhân theo nội dung mô tả ở trên. Chúng tôi luôn tôn trọng và bảo vệ quyền lợi của bạn trong mọi trường hợp.\n',
               ),
             ],
           ),

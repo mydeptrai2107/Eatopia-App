@@ -62,7 +62,7 @@ class _SearchPageState extends State<SearchPage> {
             decoration: InputDecoration(
               filled: true,
               fillColor: Colors.grey[100],
-              hintText: 'Search',
+              hintText: 'Tìm kiếm',
               prefixIcon: const Icon(Icons.search),
               prefixIconColor: Colors.black,
               border: const OutlineInputBorder(
@@ -92,7 +92,7 @@ class _SearchPageState extends State<SearchPage> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: const <Widget>[
                     Text(
-                      'Recent Searches',
+                      'Tìm kiếm gần đây',
                       style: TextStyle(fontSize: 20, fontFamily: 'ubuntu-bold'),
                     ),
                   ] +

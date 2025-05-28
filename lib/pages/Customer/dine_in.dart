@@ -50,7 +50,7 @@ class _DineInPageState extends State<DineInPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Dine-In'),
+        title: const Text('Dùng bữa tại nhà hàng'),
       ),
       body: Column(
         children: [
@@ -59,7 +59,7 @@ class _DineInPageState extends State<DineInPage> {
             child: TextField(
               controller: _searchController,
               decoration: const InputDecoration(
-                hintText: 'Search for a table',
+                hintText: 'Tìm kiếm bàn',
                 prefixIcon: Icon(Icons.search),
               ),
             ),
@@ -82,7 +82,7 @@ class _DineInPageState extends State<DineInPage> {
                         ),
                       );
                     },
-                    child: const Text('Reserve'),
+                    child: const Text('Đặt chỗ'),
                   ),
                 );
               },
@@ -126,7 +126,7 @@ class _ReservationScreenState extends State<ReservationScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Reserve Table ${widget.table}'),
+        title: Text('Đặt bàn ${widget.table}'),
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -135,14 +135,14 @@ class _ReservationScreenState extends State<ReservationScreen> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const Text(
-                'Fill out the following information to make a reservation:',
+                'Điền thông tin sau để đặt chỗ:',
                 style: TextStyle(fontSize: 18.0),
               ),
               const SizedBox(height: 16.0),
               TextField(
                 controller: _nameController,
                 decoration: const InputDecoration(
-                  labelText: 'Name',
+                  labelText: 'Họ tên',
                   border: OutlineInputBorder(),
                 ),
               ),
@@ -158,7 +158,7 @@ class _ReservationScreenState extends State<ReservationScreen> {
               TextField(
                 controller: _phoneController,
                 decoration: const InputDecoration(
-                  labelText: 'Phone',
+                  labelText: 'Số điện thoại',
                   border: OutlineInputBorder(),
                 ),
               ),
@@ -166,7 +166,7 @@ class _ReservationScreenState extends State<ReservationScreen> {
               TextField(
                 controller: _dateController,
                 decoration: const InputDecoration(
-                  labelText: 'Date',
+                  labelText: 'Ngày',
                   border: OutlineInputBorder(),
                 ),
               ),
@@ -174,7 +174,7 @@ class _ReservationScreenState extends State<ReservationScreen> {
               TextField(
                 controller: _timeController,
                 decoration: const InputDecoration(
-                  labelText: 'Time',
+                  labelText: 'Giờ',
                   border: OutlineInputBorder(),
                 ),
               ),
@@ -182,16 +182,19 @@ class _ReservationScreenState extends State<ReservationScreen> {
               TextField(
                 controller: _guestsController,
                 decoration: const InputDecoration(
-                  labelText: 'Number of Guests',
+                  labelText: 'Số người',
                   border: OutlineInputBorder(),
                 ),
               ),
               const SizedBox(height: 16.0),
-              ElevatedButton(
-                onPressed: () {
-                  // Implement reservation functionality here
-                },
-                child: Text('Reserve Table ${widget.table}'),
+              SizedBox(
+                width: MediaQuery.sizeOf(context).width,
+                child: ElevatedButton(
+                  onPressed: () {
+                    // Implement reservation functionality here
+                  },
+                  child: Text('Đặt bàn ${widget.table}'),
+                ),
               ),
             ],
           ),

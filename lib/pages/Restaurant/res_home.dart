@@ -28,7 +28,12 @@ class ResHome extends StatefulWidget {
 class _ResHomeState extends State<ResHome> {
   late Size scrSize;
   int selectedIndex = 0;
-  List<String> headings = ['Home', 'Manage Items', 'Orders', 'More'];
+  List<String> headings = [
+    'Trang chủ',
+    'Quản lý sản phẩm',
+    'Đơn hàng',
+    'Cài đặt'
+  ];
   final PageController pageController = PageController();
   @override
   Widget build(BuildContext context) {
@@ -37,12 +42,14 @@ class _ResHomeState extends State<ResHome> {
     return Scaffold(
       bottomNavigationBar: BottomNavigationBar(
           currentIndex: selectedIndex,
-          onTap: (value) => setState(() {
-                selectedIndex = value;
-                pageController.animateToPage(value,
-                    duration: const Duration(milliseconds: 300),
-                    curve: Curves.easeInOut);
-              }),
+          onTap: (value) => setState(
+                () {
+                  selectedIndex = value;
+                  pageController.animateToPage(value,
+                      duration: const Duration(milliseconds: 300),
+                      curve: Curves.easeInOut);
+                },
+              ),
           showUnselectedLabels: false,
           elevation: 5,
           backgroundColor: Colors.white,
@@ -50,7 +57,7 @@ class _ResHomeState extends State<ResHome> {
           items: const [
             BottomNavigationBarItem(
               icon: Icon(Icons.home),
-              label: 'Home',
+              label: 'Trang chủ',
             ),
             BottomNavigationBarItem(
               icon: Icon(Icons.list_alt),
@@ -184,8 +191,8 @@ class _RestOpenToggleState extends State<RestOpenToggle> {
                   flex: 2,
                   child: Text(
                     isSwitched
-                        ? 'Your Restaurant is Live !'
-                        : 'Your Restaurant is Closed',
+                        ? 'Nhà hàng của bạn đang hoạt động!'
+                        : 'Nhà hàng của bạn đã đóng cửa',
                     style: const TextStyle(
                         fontFamily: 'ubuntu-bold',
                         fontSize: 20,
@@ -196,8 +203,8 @@ class _RestOpenToggleState extends State<RestOpenToggle> {
                 Switch(
                   onChanged: (value) async {
                     bool confirm = await _showConfirmationDialog(isSwitched
-                        ? 'Are you Sure you want to Close Restaurant ?'
-                        : 'Are you Sure you want to Open Restaurant ?');
+                        ? 'Bạn có chắc chắn muốn đóng nhà hàng không?'
+                        : 'Bạn có chắc chắn muốn mở nhà hàng không?');
                     if (confirm) {
                       setState(() {
                         isSwitched = value;
@@ -246,9 +253,7 @@ class _AddDescriptionWidgetState extends State<AddDescriptionWidget> {
         description = data.get('description');
         controller.text = description;
       });
-    } catch (_) {
-
-    }
+    } catch (_) {}
 
     setState(() {
       isLoading = false;
@@ -275,7 +280,7 @@ class _AddDescriptionWidgetState extends State<AddDescriptionWidget> {
         children: [
           Row(
             children: [
-              const Text('Description: ',
+              const Text('Mô tả: ',
                   style: TextStyle(
                       fontFamily: 'ubuntu-bold',
                       fontSize: 20,
@@ -307,7 +312,7 @@ class _AddDescriptionWidgetState extends State<AddDescriptionWidget> {
               filled: true,
               fillColor: Colors.white,
               border: OutlineInputBorder(),
-              labelText: 'Add Description',
+              labelText: 'Thêm mô tả',
             ),
           ),
 
@@ -421,11 +426,11 @@ class _RestaurantNameWidgetState extends State<RestaurantNameWidget> {
                         builder: (context) => AlertDialog(
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(20)),
-                          title: const Text('Change Restaurant Name'),
+                          title: const Text('Thay đổi tên nhà hàng'),
                           content: TextField(
                             controller: conroller,
                             decoration: const InputDecoration(
-                              hintText: 'Enter new name',
+                              hintText: 'Nhập tên mới',
                             ),
                           ),
                           actions: [
@@ -435,7 +440,7 @@ class _RestaurantNameWidgetState extends State<RestaurantNameWidget> {
                                 await changeResName();
                                 Navigator.pop(context, resName);
                               },
-                              child: const Text('Change'),
+                              child: const Text('Thay đổi'),
                             ),
                           ],
                         ),
@@ -544,7 +549,7 @@ class _ImageSelectWidgetState extends State<ImageSelectWidget> {
           Row(
             children: [
               const Text(
-                'Restauarant Image',
+                'Logo nhà hàng',
                 style: TextStyle(fontFamily: 'ubuntu-bold', fontSize: 20),
               ),
               const Spacer(),

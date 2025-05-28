@@ -63,7 +63,7 @@ class _AddItemPageState extends State<AddItemPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Add Item'),
+        title: const Text('Thêm món'),
       ),
       body: Container(
         padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
@@ -77,7 +77,7 @@ class _AddItemPageState extends State<AddItemPage> {
                     const Align(
                       alignment: Alignment.centerLeft,
                       child: Text(
-                        'Item Name',
+                        'Tên món',
                         style:
                             TextStyle(fontSize: 20, fontFamily: 'ubuntu-bold'),
                       ),
@@ -89,7 +89,7 @@ class _AddItemPageState extends State<AddItemPage> {
                         hintText: '',
                         validator: (value) {
                           if (value!.isEmpty) {
-                            return 'Please enter item name';
+                            return 'Vui lòng nhập tên món';
                           }
                           return null;
                         },
@@ -100,7 +100,7 @@ class _AddItemPageState extends State<AddItemPage> {
                     const Align(
                       alignment: Alignment.centerLeft,
                       child: Text(
-                        'Item Description',
+                        'Mô tả món ăn',
                         style:
                             TextStyle(fontSize: 20, fontFamily: 'ubuntu-bold'),
                       ),
@@ -133,7 +133,7 @@ class _AddItemPageState extends State<AddItemPage> {
                     const Align(
                       alignment: Alignment.centerLeft,
                       child: Text(
-                        'Item Price',
+                        'Giá món ăn',
                         style:
                             TextStyle(fontSize: 20, fontFamily: 'ubuntu-bold'),
                       ),
@@ -153,7 +153,7 @@ class _AddItemPageState extends State<AddItemPage> {
                     Row(
                       children: [
                         const Text(
-                          'Item image',
+                          'Hình ảnh món ăn',
                           style: TextStyle(
                               fontSize: 20, fontFamily: 'ubuntu-bold'),
                         ),
@@ -181,7 +181,7 @@ class _AddItemPageState extends State<AddItemPage> {
                       ),
                       child: imageFile!.path.isEmpty
                           ? const Center(
-                              child: Text('No image selected'),
+                              child: Text('Không có ảnh nào được chọn'),
                             )
                           : Image.file(imageFile!),
                     ),
@@ -191,7 +191,7 @@ class _AddItemPageState extends State<AddItemPage> {
                     const Align(
                       alignment: Alignment.centerLeft,
                       child: Text(
-                        'Category',
+                        'Danh mục',
                         style:
                             TextStyle(fontSize: 20, fontFamily: 'ubuntu-bold'),
                       ),
@@ -237,7 +237,7 @@ class _AddItemPageState extends State<AddItemPage> {
                           Row(
                             children: [
                               const Text(
-                                'Add ons',
+                                'Thêm lựa chọn',
                                 style: TextStyle(
                                     fontFamily: 'ubuntu-bold', fontSize: 20),
                               ),
@@ -263,11 +263,21 @@ class _AddItemPageState extends State<AddItemPage> {
                       ),
                     ),
                     const SizedBox(height: 20),
-                    ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          fixedSize: const Size(150, 50),
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(10)),
+                    SizedBox(
+                      width: MediaQuery.sizeOf(context).width,
+                      child: ElevatedButton(
+                        style: ButtonStyle(
+                          backgroundColor:
+                              WidgetStateProperty.all<Color>(appGreen),
+                          fixedSize: WidgetStateProperty.all<Size>(Size(
+                              MediaQuery.of(context).size.width / 3,
+                              MediaQuery.of(context).size.height / 18)),
+                          shape:
+                              WidgetStateProperty.all<RoundedRectangleBorder>(
+                            RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10.0),
+                            ),
+                          ),
                         ),
                         onPressed: () async {
                           if (!_formKey.currentState!.validate()) {
@@ -298,9 +308,14 @@ class _AddItemPageState extends State<AddItemPage> {
                                 color: Colors.white,
                               )
                             : const Text(
-                                'Create Item',
-                                style: TextStyle(fontSize: 15),
-                              )),
+                                'Tạo món ăn',
+                                style: TextStyle(
+                                  fontSize: 15,
+                                  color: Colors.white,
+                                ),
+                              ),
+                      ),
+                    ),
                   ],
                 ),
               )),
@@ -318,7 +333,8 @@ Widget buildAddOnList(BuildContext context, Map<String, int> addOns) {
       itemBuilder: (context, index) {
         return addOns.isEmpty
             ? const SizedBox(
-                height: 300, child: Center(child: Text('No Add ons!')))
+                height: 300,
+                child: Center(child: Text('Không có lựa chọn nào')))
             : Card(
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(20),
@@ -369,7 +385,7 @@ Widget buildEditAddon(BuildContext context, GlobalKey<FormState> key,
   addOnPriceController.text = addOns.values.toList()[index].toString();
   return AlertDialog(
     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-    title: const Text('Edit Add on'),
+    title: const Text('Chỉnh sửa lựa chọn'),
     content: Form(
         key: key,
         child: SizedBox(
@@ -378,28 +394,28 @@ Widget buildEditAddon(BuildContext context, GlobalKey<FormState> key,
             children: [
               TextFormField(
                 validator: (value) =>
-                    value!.isEmpty ? 'Please enter add on name' : null,
+                    value!.isEmpty ? 'Vui lòng nhập tên lựa chọn' : null,
                 controller: nameController,
-                decoration: const InputDecoration(hintText: 'Add on name'),
+                decoration: const InputDecoration(hintText: 'Thêm vào tên'),
               ),
               TextFormField(
                 keyboardType: TextInputType.number,
                 validator: priceValidator,
                 controller: addOnPriceController,
-                decoration: const InputDecoration(hintText: 'Add on Price'),
+                decoration: const InputDecoration(hintText: 'Thêm vào giá'),
               ),
             ],
           ),
         )),
     actions: [
       TextButton(
-        child: const Text('CANCEL'),
+        child: const Text('Hủy'),
         onPressed: () {
           Navigator.of(context).pop();
         },
       ),
       TextButton(
-        child: const Text('EDIT'),
+        child: const Text('Chỉnh sửa'),
         onPressed: () {
           if (key.currentState!.validate()) {
             addOns.remove(addOns.keys.toList()[index]);
@@ -418,7 +434,7 @@ Widget buildAddonCreate(
   final addOnPriceController = TextEditingController();
   return AlertDialog(
     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-    title: const Text('Create Add on'),
+    title: const Text('Tạo lựa chọn thêm'),
     content: Form(
         key: key,
         child: SizedBox(
@@ -427,28 +443,29 @@ Widget buildAddonCreate(
             children: [
               TextFormField(
                 validator: (value) =>
-                    value!.isEmpty ? 'Please enter add on name' : null,
+                    value!.isEmpty ? 'Vui lòng nhập tên lựa chọn' : null,
                 controller: nameController,
-                decoration: const InputDecoration(hintText: 'Add on name'),
+                decoration:
+                    const InputDecoration(hintText: 'Thêm tên lựa chọn'),
               ),
               TextFormField(
                 keyboardType: TextInputType.number,
                 validator: priceValidator,
                 controller: addOnPriceController,
-                decoration: const InputDecoration(hintText: 'Add on Price'),
+                decoration: const InputDecoration(hintText: 'Thêm giá'),
               ),
             ],
           ),
         )),
     actions: [
       TextButton(
-        child: const Text('CANCEL'),
+        child: const Text('Hủy'),
         onPressed: () {
           Navigator.of(context).pop();
         },
       ),
       TextButton(
-        child: const Text('CREATE'),
+        child: const Text('Tạo'),
         onPressed: () async {
           if (key.currentState!.validate()) {
             addOns[nameController.text] = int.parse(addOnPriceController.text);

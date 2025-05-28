@@ -73,7 +73,7 @@ class _EditItemPageState extends State<EditItemPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Edit Item'),
+        title: const Text('Chỉnh sửa món ăn'),
       ),
       body: Container(
         padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
@@ -108,13 +108,13 @@ class _EditItemPageState extends State<EditItemPage> {
                           Icons.delete,
                           color: appRed,
                         ),
-                        label: Text('Delete Item',
+                        label: Text('Xóa món ăn',
                             style: TextStyle(color: appRed, fontSize: 18))),
                     const SizedBox(height: 20),
                     const Align(
                       alignment: Alignment.centerLeft,
                       child: Text(
-                        'Item Name',
+                        'Tên món ăn',
                         style:
                             TextStyle(fontSize: 20, fontFamily: 'ubuntu-bold'),
                       ),
@@ -126,7 +126,7 @@ class _EditItemPageState extends State<EditItemPage> {
                         hintText: '',
                         validator: (value) {
                           if (value!.isEmpty) {
-                            return 'Please enter item name';
+                            return 'Vui lòng nhập tên món ăn';
                           }
                           return null;
                         },
@@ -137,7 +137,7 @@ class _EditItemPageState extends State<EditItemPage> {
                     const Align(
                       alignment: Alignment.centerLeft,
                       child: Text(
-                        'Item Description',
+                        'Mô tả món ăn',
                         style:
                             TextStyle(fontSize: 20, fontFamily: 'ubuntu-bold'),
                       ),
@@ -170,7 +170,7 @@ class _EditItemPageState extends State<EditItemPage> {
                     const Align(
                       alignment: Alignment.centerLeft,
                       child: Text(
-                        'Item Price',
+                        'Giá món ăn',
                         style:
                             TextStyle(fontSize: 20, fontFamily: 'ubuntu-bold'),
                       ),
@@ -190,7 +190,7 @@ class _EditItemPageState extends State<EditItemPage> {
                     Row(
                       children: [
                         const Text(
-                          'Item image',
+                          'Ảnh món ăn',
                           style: TextStyle(
                               fontSize: 20, fontFamily: 'ubuntu-bold'),
                         ),
@@ -224,7 +224,7 @@ class _EditItemPageState extends State<EditItemPage> {
                     const Align(
                       alignment: Alignment.centerLeft,
                       child: Text(
-                        'Category',
+                        'Danh mục',
                         style:
                             TextStyle(fontSize: 20, fontFamily: 'ubuntu-bold'),
                       ),
@@ -270,7 +270,7 @@ class _EditItemPageState extends State<EditItemPage> {
                           Row(
                             children: [
                               const Text(
-                                'Add ons',
+                                'Thêm lựa chọn',
                                 style: TextStyle(
                                     fontFamily: 'ubuntu-bold', fontSize: 20),
                               ),
@@ -296,11 +296,21 @@ class _EditItemPageState extends State<EditItemPage> {
                       ),
                     ),
                     const SizedBox(height: 20),
-                    ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          fixedSize: const Size(150, 50),
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(10)),
+                    SizedBox(
+                      width: MediaQuery.sizeOf(context).width,
+                      child: ElevatedButton(
+                        style: ButtonStyle(
+                          backgroundColor:
+                              WidgetStateProperty.all<Color>(appGreen),
+                          fixedSize: WidgetStateProperty.all<Size>(Size(
+                              MediaQuery.of(context).size.width / 3,
+                              MediaQuery.of(context).size.height / 18)),
+                          shape:
+                              WidgetStateProperty.all<RoundedRectangleBorder>(
+                            RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10.0),
+                            ),
+                          ),
                         ),
                         onPressed: () async {
                           if (!_formKey.currentState!.validate()) {
@@ -333,9 +343,14 @@ class _EditItemPageState extends State<EditItemPage> {
                                 color: Colors.white,
                               )
                             : const Text(
-                                'Save Changes',
-                                style: TextStyle(fontSize: 15),
-                              )),
+                                'Lưu thay đổi',
+                                style: TextStyle(
+                                  fontSize: 15,
+                                  color: Colors.white,
+                                ),
+                              ),
+                      ),
+                    ),
                   ],
                 ),
               )),
@@ -436,7 +451,7 @@ Widget buildEditAddon(BuildContext context, GlobalKey<FormState> key,
   addOnPriceController.text = addOns.values.toList()[index].toString();
   return AlertDialog(
     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-    title: const Text('Edit Add on'),
+    title: const Text('Chỉnh sửa lựa chọn'),
     content: Form(
         key: key,
         child: SizedBox(
@@ -445,28 +460,29 @@ Widget buildEditAddon(BuildContext context, GlobalKey<FormState> key,
             children: [
               TextFormField(
                 validator: (value) =>
-                    value!.isEmpty ? 'Please enter add on name' : null,
+                    value!.isEmpty ? 'Vui lòng thêm tên lựa chọn' : null,
                 controller: nameController,
-                decoration: const InputDecoration(hintText: 'Add on name'),
+                decoration:
+                    const InputDecoration(hintText: 'Thêm tên lựa chọn'),
               ),
               TextFormField(
                 keyboardType: TextInputType.number,
                 validator: priceValidator,
                 controller: addOnPriceController,
-                decoration: const InputDecoration(hintText: 'Add on Price'),
+                decoration: const InputDecoration(hintText: 'Thêm giá'),
               ),
             ],
           ),
         )),
     actions: [
       TextButton(
-        child: const Text('CANCEL'),
+        child: const Text('Hủy'),
         onPressed: () {
           Navigator.of(context).pop();
         },
       ),
       TextButton(
-        child: const Text('EDIT'),
+        child: const Text('Chỉnh sửa'),
         onPressed: () {
           if (key.currentState!.validate()) {
             addOns.remove(addOns.keys.toList()[index]);

@@ -16,7 +16,7 @@ class _UserOrderState extends State<UserOrder> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('My Orders'),
+        title: const Text('Đơn hàng của tôi'),
       ),
       body: Container(
         height: MediaQuery.of(context).size.height,
@@ -27,14 +27,14 @@ class _UserOrderState extends State<UserOrder> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: const [
                 Text(
-                  'Current Orders',
+                  'Đơn hàng hiện tại',
                   style: TextStyle(fontFamily: 'ubuntu-bold', fontSize: 20),
                 ),
                 SizedBox(height: 10),
                 CurrentOrder(),
                 SizedBox(height: 20),
                 Text(
-                  'Past Orders',
+                  'Đơn hàng trước đây',
                   style: TextStyle(fontFamily: 'ubuntu-bold', fontSize: 20),
                 ),
                 SizedBox(height: 10),
@@ -90,25 +90,27 @@ class _CurrentOrderState extends State<CurrentOrder> {
             itemBuilder: (context, index) {
               if (orders.isEmpty) {
                 return Container(
-                    height: 50,
-                    decoration: BoxDecoration(
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.grey.withAlpha(50),
-                          spreadRadius: 1,
-                          blurRadius: 1,
-                          offset:
-                              const Offset(2, 3), // changes position of shadow
-                        ),
-                      ],
-                      borderRadius: BorderRadius.circular(10),
-                      color: Colors.white,
+                  height: 50,
+                  decoration: BoxDecoration(
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.grey.withAlpha(50),
+                        spreadRadius: 1,
+                        blurRadius: 1,
+                        offset:
+                            const Offset(2, 3), // changes position of shadow
+                      ),
+                    ],
+                    borderRadius: BorderRadius.circular(10),
+                    color: Colors.white,
+                  ),
+                  child: const Center(
+                    child: Text(
+                      'Không có đơn hàng trước đây!',
+                      style: TextStyle(fontSize: 18),
                     ),
-                    child: const Center(
-                        child: Text(
-                      'No Past Orders!',
-                      style: TextStyle(fontSize: 20),
-                    )));
+                  ),
+                );
               }
               return Container(
                 padding: const EdgeInsets.all(10),
@@ -129,7 +131,7 @@ class _CurrentOrderState extends State<CurrentOrder> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     const Text(
-                      'Order Summary',
+                      'Tóm tắt đơn hàng',
                       style: TextStyle(fontFamily: 'ubuntu-bold', fontSize: 20),
                     ),
                     const SizedBox(height: 10),
@@ -175,7 +177,7 @@ class _CurrentOrderState extends State<CurrentOrder> {
                     Row(
                       children: [
                         const Text(
-                          'Total',
+                          'Tổng cộng',
                           style: TextStyle(
                               fontFamily: 'ubuntu-bold', fontSize: 20),
                         ),
@@ -204,7 +206,7 @@ class _CurrentOrderState extends State<CurrentOrder> {
                     Row(
                       children: [
                         const Text(
-                          'Status:',
+                          'Trạng thái:',
                           style: TextStyle(
                             fontSize: 20,
                             fontFamily: 'ubuntu-bold',
@@ -273,25 +275,27 @@ class _PastOrderState extends State<PastOrder> {
             itemBuilder: (context, index) {
               if (orders.isEmpty) {
                 return Container(
-                    height: 50,
-                    decoration: BoxDecoration(
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.grey.withAlpha(50),
-                          spreadRadius: 1,
-                          blurRadius: 1,
-                          offset:
-                              const Offset(2, 3), // changes position of shadow
-                        ),
-                      ],
-                      borderRadius: BorderRadius.circular(10),
-                      color: Colors.white,
+                  height: 50,
+                  decoration: BoxDecoration(
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.grey.withAlpha(50),
+                        spreadRadius: 1,
+                        blurRadius: 1,
+                        offset:
+                            const Offset(2, 3), // changes position of shadow
+                      ),
+                    ],
+                    borderRadius: BorderRadius.circular(10),
+                    color: Colors.white,
+                  ),
+                  child: const Center(
+                    child: Text(
+                      'Không có đơn hàng trước đây!',
+                      style: TextStyle(fontSize: 18),
                     ),
-                    child: const Center(
-                        child: Text(
-                      'No Past Orders!',
-                      style: TextStyle(fontSize: 20),
-                    )));
+                  ),
+                );
               }
               return Container(
                 padding: const EdgeInsets.all(10),
@@ -312,7 +316,7 @@ class _PastOrderState extends State<PastOrder> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     const Text(
-                      'Order Summary',
+                      'Tóm tắt đơn hàng',
                       style: TextStyle(fontFamily: 'ubuntu-bold', fontSize: 20),
                     ),
                     const SizedBox(height: 10),
@@ -358,7 +362,7 @@ class _PastOrderState extends State<PastOrder> {
                     Row(
                       children: [
                         const Text(
-                          'Total',
+                          'Tổng cộng',
                           style: TextStyle(
                               fontFamily: 'ubuntu-bold', fontSize: 20),
                         ),
@@ -387,7 +391,7 @@ class _PastOrderState extends State<PastOrder> {
                     Row(
                       children: [
                         const Text(
-                          'Status:',
+                          'Trạng thái:',
                           style: TextStyle(
                             fontSize: 20,
                             fontFamily: 'ubuntu-bold',

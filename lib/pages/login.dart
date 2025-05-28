@@ -35,12 +35,15 @@ class _LoginPageState extends State<LoginPage> {
               Row(mainAxisAlignment: MainAxisAlignment.center, children: const [
             Image(image: AssetImage('images/eatopia.png'), height: 50),
             SizedBox(width: 10),
-            Text('EATOPIA',
-                style: TextStyle(
-                    color: Colors.black,
-                    letterSpacing: 2,
-                    fontSize: 30,
-                    fontWeight: FontWeight.bold))
+            Text(
+              'HOMEFOOD',
+              style: TextStyle(
+                color: Colors.black,
+                letterSpacing: 2,
+                fontSize: 25,
+                fontWeight: FontWeight.bold,
+              ),
+            )
           ])),
       body: Container(
         padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -48,7 +51,7 @@ class _LoginPageState extends State<LoginPage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             const Text(
-              'Login',
+              'Đăng nhập',
               style: TextStyle(
                 fontSize: 40,
                 fontWeight: FontWeight.bold,
@@ -68,13 +71,13 @@ class _LoginPageState extends State<LoginPage> {
                           size: 20,
                         ),
                         labelText: 'Email',
-                        hintText: 'Enter your email',
+                        hintText: 'Nhập email',
                         validator: (value) {
                           if (value!.isEmpty) {
-                            return 'Please enter your email';
+                            return 'Vui lòng nhập email';
                           }
                           if (!EmailValidator.validate(value)) {
-                            return 'Please enter a valid email';
+                            return 'Vui lòng nhập email hợp lệ';
                           }
                           return null;
                         },
@@ -86,12 +89,12 @@ class _LoginPageState extends State<LoginPage> {
                     PasswordTextField(
                         validator: (value) {
                           if (value!.isEmpty) {
-                            return 'Please enter your password';
+                            return 'Vui lòng nhập mật khẩu';
                           }
                           return null;
                         },
-                        labelText: 'Password',
-                        hintText: 'Enter your password',
+                        labelText: 'Mật khẩu',
+                        hintText: 'Nhập mật khẩu của bạn',
                         passwordController: passwordController,
                         boxPassH: 100,
                         primaryColor: _primaryColor),
@@ -99,85 +102,89 @@ class _LoginPageState extends State<LoginPage> {
                   ],
                 )),
             ElevatedButton(
-                style: ButtonStyle(
-                    backgroundColor:
-                        WidgetStateProperty.all<Color>(_primaryColor),
-                    fixedSize: WidgetStateProperty.all<Size>(Size(
-                        MediaQuery.of(context).size.width / 3,
-                        MediaQuery.of(context).size.height / 18)),
-                    shape: WidgetStateProperty.all<RoundedRectangleBorder>(
-                      RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10.0),
-                      ),
-                    )),
-                onPressed: () async {
-                  if (!_formKey.currentState!.validate()) {
-                    return;
-                  }
+              style: ButtonStyle(
+                  backgroundColor:
+                      WidgetStateProperty.all<Color>(_primaryColor),
+                  fixedSize: WidgetStateProperty.all<Size>(Size(
+                      MediaQuery.of(context).size.width / 3,
+                      MediaQuery.of(context).size.height / 18)),
+                  shape: WidgetStateProperty.all<RoundedRectangleBorder>(
+                    RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10.0),
+                    ),
+                  )),
+              onPressed: () async {
+                if (!_formKey.currentState!.validate()) {
+                  return;
+                }
 
-                  setState(() {
-                    isLoading = true;
-                  });
+                setState(() {
+                  isLoading = true;
+                });
 
-                  String? res = await AuthServices().signInWithEmail(
-                      emailController.text, passwordController.text, context);
+                String? res = await AuthServices().signInWithEmail(
+                    emailController.text, passwordController.text, context);
 
-                  if (res == null) {
-                    if (await AuthServices().isCustomer()) {
-                      Navigator.pushNamedAndRemoveUntil(
-                          context, '/UserHomePage', (route) => false);
-                    } else {
-                      Navigator.pushNamedAndRemoveUntil(
-                          context, '/ResHomePage', (route) => false);
-                    }
+                if (res == null) {
+                  if (await AuthServices().isCustomer()) {
+                    Navigator.pushNamedAndRemoveUntil(
+                        context, '/UserHomePage', (route) => false);
                   } else {
-                    if (res == 'user-not-found') {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(
-                          backgroundColor: appRed,
-                          elevation: 10,
-                          shape: const RoundedRectangleBorder(
-                            borderRadius: BorderRadius.only(
-                              topLeft: Radius.circular(10),
-                              topRight: Radius.circular(10),
-                            ),
-                          ),
-                          content: const Text('No user found for that email'),
-                        ),
-                      );
-                    } else if (res == 'wrong-password') {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(
-                          backgroundColor: appRed,
-                          elevation: 10,
-                          shape: const RoundedRectangleBorder(
-                            borderRadius: BorderRadius.only(
-                              topLeft: Radius.circular(10),
-                              topRight: Radius.circular(10),
-                            ),
-                          ),
-                          content: const Text('Wrong password'),
-                        ),
-                      );
-                    }
+                    Navigator.pushNamedAndRemoveUntil(
+                        context, '/ResHomePage', (route) => false);
                   }
+                } else {
+                  if (res == 'user-not-found') {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        backgroundColor: appRed,
+                        elevation: 10,
+                        shape: const RoundedRectangleBorder(
+                          borderRadius: BorderRadius.only(
+                            topLeft: Radius.circular(10),
+                            topRight: Radius.circular(10),
+                          ),
+                        ),
+                        content: const Text('No user found for that email'),
+                      ),
+                    );
+                  } else if (res == 'wrong-password') {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        backgroundColor: appRed,
+                        elevation: 10,
+                        shape: const RoundedRectangleBorder(
+                          borderRadius: BorderRadius.only(
+                            topLeft: Radius.circular(10),
+                            topRight: Radius.circular(10),
+                          ),
+                        ),
+                        content: const Text('Wrong password'),
+                      ),
+                    );
+                  }
+                }
 
-                  setState(() {
-                    isLoading = false;
-                  });
-                },
-                child: isLoading
-                    ? const CircularProgressIndicator(
+                setState(() {
+                  isLoading = false;
+                });
+              },
+              child: isLoading
+                  ? const CircularProgressIndicator(
+                      color: Colors.white,
+                      strokeWidth: 1,
+                    )
+                  : const Text(
+                      'Đăng nhập',
+                      style: TextStyle(
                         color: Colors.white,
-                        strokeWidth: 1,
-                      )
-                    : const Text(
-                        'Login',
-                      )),
+                      ),
+                    ),
+            ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const Text('Don\'t have an account?'),
+                const Text('Chưa có tài khoản'),
                 TextButton(
                   style: ButtonStyle(
                     foregroundColor:
@@ -188,7 +195,7 @@ class _LoginPageState extends State<LoginPage> {
                         context, '/UserSignUpPageOne');
                   },
                   child: const Text(
-                    'Sign Up',
+                    'Đăng ký',
                     style: TextStyle(fontWeight: FontWeight.bold),
                   ),
                 )

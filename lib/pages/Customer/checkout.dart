@@ -22,7 +22,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Checkout'),
+        title: const Text('Thanh toán'),
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -48,7 +48,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     const Text(
-                      'Review Your Information',
+                      'Xem lại thông tin của bạn',
                       style: TextStyle(fontFamily: 'ubuntu-bold', fontSize: 20),
                     ),
                     const SizedBox(height: 10),
@@ -57,24 +57,25 @@ class _CheckoutPageState extends State<CheckoutPage> {
                         const Icon(Icons.location_on),
                         const SizedBox(width: 10),
                         const Text(
-                          'Address',
+                          'Địa chỉ',
                           style: TextStyle(
                               fontFamily: 'ubuntu-bold', fontSize: 20),
                         ),
                         const Spacer(),
                         IconButton(
-                            onPressed: () async {
-                              String? add = await Navigator.push(context,
-                                  MaterialPageRoute(builder: (context) {
-                                return const MapScreen();
-                              }));
-                              if (add != null) {
-                                setState(() {
-                                  widget.userData['stAddress'] = add;
-                                });
-                              }
-                            },
-                            icon: const Icon(Icons.edit)),
+                          onPressed: () async {
+                            String? add = await Navigator.push(context,
+                                MaterialPageRoute(builder: (context) {
+                              return const MapScreen();
+                            }));
+                            if (add != null) {
+                              setState(() {
+                                widget.userData['stAddress'] = add;
+                              });
+                            }
+                          },
+                          icon: const Icon(Icons.edit),
+                        ),
                       ],
                     ),
                     Text(
@@ -91,7 +92,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
                         Icon(Icons.phone),
                         SizedBox(width: 10),
                         Text(
-                          'Phone Number',
+                          'Số điện thoại',
                           style: TextStyle(
                               fontFamily: 'ubuntu-bold', fontSize: 20),
                         ),
@@ -119,18 +120,22 @@ class _CheckoutPageState extends State<CheckoutPage> {
                   color: Colors.white,
                   boxShadow: [
                     BoxShadow(
-                        color: Colors.grey.withAlpha(50),
-                        spreadRadius: 5,
-                        blurRadius: 7,
-                        offset: const Offset(0, 3)),
+                      color: Colors.grey.withAlpha(50),
+                      spreadRadius: 5,
+                      blurRadius: 7,
+                      offset: const Offset(0, 3),
+                    ),
                   ],
                 ),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     const Text(
-                      'Order Summary',
-                      style: TextStyle(fontFamily: 'ubuntu-bold', fontSize: 20),
+                      'Tóm tắt đơn hàng',
+                      style: TextStyle(
+                        fontFamily: 'ubuntu-bold',
+                        fontSize: 20,
+                      ),
                     ),
                     const SizedBox(height: 10),
                     ListView.builder(
@@ -162,9 +167,11 @@ class _CheckoutPageState extends State<CheckoutPage> {
                     Row(
                       children: [
                         const Text(
-                          'Total',
+                          'Tổng cộng',
                           style: TextStyle(
-                              fontFamily: 'ubuntu-bold', fontSize: 20),
+                            fontFamily: 'ubuntu-bold',
+                            fontSize: 20,
+                          ),
                         ),
                         const Spacer(),
                         Text(
@@ -187,29 +194,34 @@ class _CheckoutPageState extends State<CheckoutPage> {
                   color: Colors.white,
                   boxShadow: [
                     BoxShadow(
-                        color: Colors.grey.withAlpha(50),
-                        spreadRadius: 5,
-                        blurRadius: 7,
-                        offset: const Offset(0, 3)),
+                      color: Colors.grey.withAlpha(50),
+                      spreadRadius: 5,
+                      blurRadius: 7,
+                      offset: const Offset(0, 3),
+                    ),
                   ],
                 ),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     const Text(
-                      'Payment Method',
-                      style: TextStyle(fontFamily: 'ubuntu-bold', fontSize: 20),
+                      'Phương thức thanh toán',
+                      style: TextStyle(
+                        fontFamily: 'ubuntu-bold',
+                        fontSize: 18,
+                      ),
                     ),
                     const SizedBox(height: 10),
                     RadioListTile(
                       selected: true,
                       value: 'COD',
                       title: const Text(
-                        'Cash On Delivery',
+                        'Tiền mặt khi giao hàng',
                         style: TextStyle(
-                            color: Colors.black,
-                            fontFamily: 'ubuntu-bold',
-                            fontSize: 20),
+                          color: Colors.black,
+                          fontFamily: 'ubuntu-bold',
+                          fontSize: 16,
+                        ),
                       ),
                       groupValue: 'COD',
                       onChanged: (value) {
@@ -224,62 +236,60 @@ class _CheckoutPageState extends State<CheckoutPage> {
               const SizedBox(height: 20),
               //Button To Place Order
               ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    elevation: 5,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    fixedSize:
-                        Size(MediaQuery.of(context).size.width * 0.8, 50),
-                    textStyle: const TextStyle(
-                      fontSize: 20,
-                      fontFamily: 'ubuntu-bold',
-                    ),
+                style: ElevatedButton.styleFrom(
+                  elevation: 5,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10),
                   ),
-                  onPressed: () async {
-                    setState(() {
-                      isLoading = true;
-                    });
-                    Order order = Order(
-                      userAddress: widget.userData['stAddress'],
-                      payMentMethod: 'COD',
-                      phone: widget.userData['phone'],
-                      custId: AuthServices().auth.currentUser!.uid,
-                      restId: CartList.list[0].restId,
-                      status: 'pending',
-                    );
-                    order.addAllOrderItems(CartList.list);
-                    await Db().addOrder(order);
-                    setState(() {
-                      isLoading = false;
-                    });
-                    //Show SnackBar
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(
-                        backgroundColor: appGreen,
-                        content: const Text('Order Placed Successfully'),
+                  fixedSize: Size(MediaQuery.of(context).size.width * 0.8, 50),
+                  textStyle: const TextStyle(
+                    fontSize: 20,
+                    fontFamily: 'ubuntu-bold',
+                  ),
+                ),
+                onPressed: () async {
+                  setState(() {
+                    isLoading = true;
+                  });
+                  Order order = Order(
+                    userAddress: widget.userData['stAddress'],
+                    payMentMethod: 'COD',
+                    phone: widget.userData['phone'],
+                    custId: AuthServices().auth.currentUser!.uid,
+                    restId: CartList.list[0].restId,
+                    status: 'pending',
+                  );
+                  order.addAllOrderItems(CartList.list);
+                  await Db().addOrder(order);
+                  setState(() {
+                    isLoading = false;
+                  });
+                  //Show SnackBar
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      backgroundColor: appGreen,
+                      content: const Text('Đơn hàng đã được đặt thành công'),
+                    ),
+                  );
+                  //Clear Cart
+                  CartList.list.clear();
+                  //Clear from database
+                  await Db().clearCart(AuthServices().auth.currentUser!.uid);
+                  //Redirect To Home Screen
+                  Navigator.pushAndRemoveUntil(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const UserHomePage(),
                       ),
-                    );
-                    //Clear Cart
-                    CartList.list.clear();
-                    //Clear from database
-                    await Db().clearCart(AuthServices().auth.currentUser!.uid);
-                    //Redirect To Home Screen
-                    Navigator.pushAndRemoveUntil(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => const UserHomePage(),
-                        ),
-                        (route) => false);
-                  },
-                  child: isLoading
-                      ? const CircularProgressIndicator(
-                          color: Colors.white,
-                          strokeWidth: 1.2,
-                        )
-                      : const Text(
-                          'Place Order',
-                        )),
+                      (route) => false);
+                },
+                child: isLoading
+                    ? const CircularProgressIndicator(
+                        color: Colors.white,
+                        strokeWidth: 1.2,
+                      )
+                    : const Text('Đặt hàng'),
+              ),
               const SizedBox(height: 20)
             ],
           ),

@@ -14,7 +14,7 @@ class PopupDialog extends StatelessWidget {
   Widget build(BuildContext context) {
     return AlertDialog(
       title: const Text(
-        'You are not currently signed in !',
+        'Hiện tại bạn chưa đăng nhập!',
         style: TextStyle(
           fontSize: 20.0,
           fontWeight: FontWeight.bold,
@@ -24,7 +24,7 @@ class PopupDialog extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
           const Text(
-              'Please Login or Create an account to access this feature \n',
+              'Vui lòng Đăng nhập hoặc Tạo tài khoản để truy cập tính năng này \n',
               style: TextStyle(
                 fontSize: 16.0,
               )),
@@ -40,7 +40,7 @@ class PopupDialog extends StatelessWidget {
               // change background color of button
               backgroundColor: appGreen, // change text color of button
             ),
-            child: const Text('Sign Up'),
+            child: const Text('Đăng ký'),
           ),
           ElevatedButton(
             onPressed: () {
@@ -54,7 +54,7 @@ class PopupDialog extends StatelessWidget {
               // change background color of button
               backgroundColor: appGreen, // change text color of button
             ),
-            child: const Text('Login'),
+            child: const Text('Đăng nhập'),
           ),
         ],
       ),
@@ -70,12 +70,12 @@ class UserMore extends StatefulWidget {
 
 class _UserMoreState extends State<UserMore> {
   List<String> value = [
-    'Profile',
-    'Address',
-    'Create Business Account',
-    'Terms and Policies',
-    'About us',
-    'Logout'
+    'Hồ sơ',
+    'Địa chỉ',
+    'Tạo tài khoản doanh nghiệp',
+    'Điều khoản và chính sách',
+    'Về chúng tôi',
+    'Đăng xuất'
   ];
 
   //create a list containing the name and icon
@@ -116,7 +116,7 @@ class _UserMoreState extends State<UserMore> {
                 iconColor: Colors.white,
                 trailing: const Icon(Icons.arrow_forward_ios),
                 onTap: () async {
-                  if (value[index] == 'Profile') {
+                  if (value[index] == 'Hồ sơ') {
                     User? user = FirebaseAuth.instance.currentUser;
                     if (user == null) {
                       showDialog(
@@ -128,16 +128,16 @@ class _UserMoreState extends State<UserMore> {
                     } else {
                       Navigator.pushNamed(context, '/User_profile');
                     }
-                  } else if (value[index] == 'Create Business Account') {
+                  } else if (value[index] == 'Tạo tài khoản doanh nghiệp') {
                     Navigator.pushNamed(context, '/BuisnessSignup');
-                  } else if (value[index] == 'Terms and Policies') {
+                  } else if (value[index] == 'Điều khoản và chính sách') {
                     Navigator.pushNamed(context, '/Terms_policy');
-                  } else if (value[index] == 'About us') {
+                  } else if (value[index] == 'Về chúng tôi') {
                     Navigator.pushNamed(context, '/About_us');
-                  } else if (value[index] == 'Logout') {
+                  } else if (value[index] == 'Đăng xuất') {
                     await AuthServices().auth.signOut();
                     Navigator.pushReplacementNamed(context, '/WelcomePage');
-                  } else if (value[index] == 'Address') {
+                  } else if (value[index] == 'Địa chỉ') {
                     String? locTxt = await Navigator.push(
                         context,
                         MaterialPageRoute(

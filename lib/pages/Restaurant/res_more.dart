@@ -14,11 +14,11 @@ class ResMore extends StatefulWidget {
 
 class _ResMoreState extends State<ResMore> {
   List<String> value = [
-    'Profile',
-    'Address',
-    'Terms and Policies',
-    'About us',
-    'Logout'
+    'Hồ sơ',
+    'Địa chỉ',
+    'Điều khoản và chính sách',
+    'Về chúng tôi',
+    'Đăng xuất'
   ];
 
   //create a list containing the name and icon
@@ -58,16 +58,16 @@ class _ResMoreState extends State<ResMore> {
                 iconColor: Colors.white,
                 trailing: const Icon(Icons.arrow_forward_ios),
                 onTap: () async {
-                  if (value[index] == 'Profile') {
+                  if (value[index] == 'Hồ sơ') {
                     Navigator.pushNamed(context, '/Res_profile');
-                  } else if (value[index] == 'Terms and Policies') {
+                  } else if (value[index] == 'Điều khoản và chính sách') {
                     Navigator.pushNamed(context, '/Terms_policy');
-                  } else if (value[index] == 'About us') {
+                  } else if (value[index] == 'Về chúng tôi') {
                     Navigator.pushNamed(context, '/About_us');
-                  } else if (value[index] == 'Logout') {
+                  } else if (value[index] == 'Đăng xuất') {
                     await AuthServices().auth.signOut();
                     Navigator.pushReplacementNamed(context, '/WelcomePage');
-                  } else if (value[index] == 'Address') {
+                  } else if (value[index] == 'Địa chỉ') {
                     String? locTxt = await Navigator.push(
                         context,
                         MaterialPageRoute(

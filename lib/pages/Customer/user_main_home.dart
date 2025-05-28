@@ -32,18 +32,19 @@ class _UserMainHomeState extends State<UserMainHome>
           width: MediaQuery.of(context).size.width,
           height: MediaQuery.of(context).size.height * 0.1,
           decoration: BoxDecoration(
-              color: appGreen,
-              boxShadow: [
-                BoxShadow(
-                    color: Colors.grey.withAlpha(50),
-                    spreadRadius: 5,
-                    blurRadius: 7,
-                    offset: const Offset(0, 3)),
-              ],
-              borderRadius: const BorderRadius.only(
-                bottomLeft: Radius.circular(10),
-                bottomRight: Radius.circular(10),
-              )),
+            color: appGreen,
+            boxShadow: [
+              BoxShadow(
+                  color: Colors.grey.withAlpha(50),
+                  spreadRadius: 5,
+                  blurRadius: 7,
+                  offset: const Offset(0, 3)),
+            ],
+            borderRadius: const BorderRadius.only(
+              bottomLeft: Radius.circular(10),
+              bottomRight: Radius.circular(10),
+            ),
+          ),
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 15.0),
             child: TextField(
@@ -57,7 +58,7 @@ class _UserMainHomeState extends State<UserMainHome>
               decoration: const InputDecoration(
                 filled: true,
                 fillColor: Colors.white,
-                hintText: 'Search',
+                hintText: 'Tìm kiếm',
                 prefixIcon: Icon(Icons.search),
                 prefixIconColor: Colors.black,
                 border: OutlineInputBorder(
@@ -98,9 +99,10 @@ class _UserMainHomeState extends State<UserMainHome>
                           context: context,
                           builder: (context) {
                             return AlertDialog(
-                              title: const Text('Sign In to Continue'),
+                              title: const Text('Đăng nhập để tiếp tục'),
                               content: const Text(
-                                  'You need to sign in to view your orders'),
+                                'Bạn cần đăng nhập để xem đơn hàng của mình',
+                              ),
                               actions: [
                                 TextButton(
                                   onPressed: () {
@@ -115,7 +117,7 @@ class _UserMainHomeState extends State<UserMainHome>
                       }
                     },
                     title: const Text(
-                      'View Your Orders',
+                      'Xem đơn hàng của bạn',
                       style: TextStyle(
                         fontFamily: 'ubuntu-bold',
                         fontSize: 20,
@@ -147,9 +149,9 @@ class _UserMainHomeState extends State<UserMainHome>
                           CustomTile(
                               size: Size(
                                   scrSize.width * 0.4, scrSize.height * 0.23),
-                              heading: 'Food Delivery',
+                              heading: 'Giao đồ ăn',
                               description:
-                                  'Order food from your favourite restaurants',
+                                  'Đặt món ăn từ nhà hàng yêu thích của bạn',
                               icon: const Icon(
                                 Icons.delivery_dining_rounded,
                                 size: 30,
@@ -162,14 +164,15 @@ class _UserMainHomeState extends State<UserMainHome>
                                       builder: (context) => const ResDine()));
                             },
                             child: CustomTile(
-                                size: Size(
-                                    scrSize.width * 0.4, scrSize.height * 0.23),
-                                heading: 'Dine-in',
-                                description: 'Make Reservations and eat out!',
-                                icon: const Icon(
-                                  Icons.restaurant,
-                                  size: 30,
-                                )),
+                              size: Size(
+                                  scrSize.width * 0.4, scrSize.height * 0.23),
+                              heading: 'Dùng bữa tại nhà hàng',
+                              description: 'Hãy đặt chỗ và ăn tại đây!',
+                              icon: const Icon(
+                                Icons.restaurant,
+                                size: 30,
+                              ),
+                            ),
                           ),
                         ],
                       )
@@ -189,11 +192,12 @@ class _UserMainHomeState extends State<UserMainHome>
                       child: Row(
                         children: [
                           const Text(
-                            'Restaurants',
+                            'Nhà hàng',
                             style: TextStyle(
-                                fontFamily: 'Ubuntu-bold',
-                                fontWeight: FontWeight.bold,
-                                fontSize: 20),
+                              fontFamily: 'Ubuntu-bold',
+                              fontWeight: FontWeight.bold,
+                              fontSize: 20,
+                            ),
                           ),
                           const Spacer(),
                           TextButton(
@@ -204,7 +208,7 @@ class _UserMainHomeState extends State<UserMainHome>
                                         builder: (context) => const AllRes()));
                               },
                               child: Text(
-                                'View All',
+                                'Xem tất cả',
                                 style: TextStyle(
                                     color: appGreen,
                                     fontWeight: FontWeight.bold),
@@ -255,10 +259,10 @@ class _RestaurantTilesState extends State<RestaurantTiles> {
                         .containsKey('description')
                     ? doc['description']
                     : '';
-                String imageURL =
-                    (doc.data() as Map<String, dynamic>).containsKey('ImageURL')
-                        ? doc['ImageURL']
-                        : 'https://i.pinimg.com/736x/49/e5/8d/49e58d5922019b8ec4642a2e2b9291c2.jpg';
+                String imageURL = (doc.data() as Map<String, dynamic>)
+                        .containsKey('ImageURL')
+                    ? doc['ImageURL']
+                    : 'https://i.pinimg.com/736x/49/e5/8d/49e58d5922019b8ec4642a2e2b9291c2.jpg';
                 bool isOpen =
                     (doc.data() as Map<String, dynamic>).containsKey('isOpen')
                         ? doc['isOpen']

@@ -1,77 +1,66 @@
 import 'package:flutter/material.dart';
 
-class AboutUs extends StatefulWidget {
+class AboutUs extends StatelessWidget {
   const AboutUs({super.key});
 
   @override
-  State<AboutUs> createState() => _AboutUsState();
-}
-
-class _AboutUsState extends State<AboutUs> {
-  @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: const Text('About Us'),
-        ),
-        body: SingleChildScrollView(
-          child: Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: const [
-                Center(
-                  child: Text(
-                    'Welcome to Eatopia',
-                    style: TextStyle(
-                      fontSize: 20.0,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
+      appBar: AppBar(
+        title: const Text('Về Chúng Tôi'),
+      ),
+      body: SingleChildScrollView(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: const [
+            Center(
+              child: Text(
+                'Chào mừng đến với HomeFood',
+                style: TextStyle(
+                  fontSize: 20.0,
+                  fontWeight: FontWeight.bold,
                 ),
-                SizedBox(height: 16.0),
-                Text(
-                  'Welcome to our food ordering and hotel reservation app! Our mission is to make it easy and convenient for you to order food and make hotel reservations from the comfort of your own device. ',
-                  style: TextStyle(fontSize: 16.0),
-                ),
-                SizedBox(height: 16.0),
-                Text(
-                  'We believe that food and travel are some of life\'s greatest pleasures, and our app is designed to enhance your dining and hotel experiences. Whether you\'re craving your favorite dish from a nearby restaurant or looking for the perfect hotel for your next vacation, our app has got you covered.',
-                  style: TextStyle(fontSize: 16.0),
-                ),
-                SizedBox(height: 16.0),
-                Text(
-                  'Our app is powered by a team of dedicated professionals who are passionate about food and travel. We work hard every day to ensure that our app is user-friendly, reliable, and secure. Our goal is to provide you with a seamless and enjoyable experience, from the moment you open our app to the moment you receive your food or check into your hotel.',
-                  style: TextStyle(fontSize: 16.0),
-                ),
-                SizedBox(height: 16.0),
-                Text(
-                  'We value your feedback and are always looking for ways to improve our app. If you have any comments, questions, or suggestions, please feel free to contact us. We are here to help you and are committed to providing you with the best possible service.',
-                  style: TextStyle(fontSize: 16.0),
-                ),
-                SizedBox(height: 16.0),
-                Text(
-                  'Thank you for choosing our app! We hope you enjoy your food and hotel experiences with us.',
-                  style: TextStyle(fontSize: 16.0),
-                ),
-                SizedBox(height: 16.0),
-                Text(
-                  'Sincerely,',
-                  style: TextStyle(fontSize: 16.0),
-                ),
-                SizedBox(height: 16.0),
-                Text(
-                  'The Eatopia Team',
-                  style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),
-                ),
-                SizedBox(height: 8.0),
-                Text(
-                  'Ghufran Nazir \nAbdullah Zahid \nMuzamil Ali',
-                  style: TextStyle(fontSize: 16.0),
-                ),
-              ],
+              ),
             ),
-          ),
-        ));
+            SizedBox(height: 16.0),
+            Text(
+              'Chào mừng bạn đến với ứng dụng đặt đồ ăn và đặt bàn trước của chúng tôi! Sứ mệnh của chúng tôi là giúp bạn dễ dàng và tiện lợi hơn trong việc đặt món ăn và đặt phòng khách sạn ngay trên thiết bị của mình.',
+              style: TextStyle(fontSize: 16.0),
+            ),
+            SizedBox(height: 16.0),
+            Text(
+              'Chúng tôi tin rằng ẩm thực và du lịch là những thú vui tuyệt vời trong cuộc sống, và ứng dụng của chúng tôi được thiết kế để nâng cao trải nghiệm ăn uống và nghỉ dưỡng của bạn. Dù bạn đang thèm món ăn yêu thích từ nhà hàng gần đó hay đang tìm kiếm một khách sạn lý tưởng cho kỳ nghỉ sắp tới, ứng dụng của chúng tôi sẽ hỗ trợ bạn.',
+              style: TextStyle(fontSize: 16.0),
+            ),
+            SizedBox(height: 16.0),
+            Text(
+              'Ứng dụng của chúng tôi được vận hành bởi một đội ngũ chuyên nghiệp, đầy đam mê với ẩm thực và du lịch. Chúng tôi luôn nỗ lực mỗi ngày để đảm bảo ứng dụng thân thiện với người dùng, đáng tin cậy và an toàn. Mục tiêu của chúng tôi là mang đến cho bạn trải nghiệm mượt mà và thú vị từ lúc mở ứng dụng đến khi bạn nhận được món ăn hoặc nhận phòng khách sạn.',
+              style: TextStyle(fontSize: 16.0),
+            ),
+            SizedBox(height: 16.0),
+            Text(
+              'Chúng tôi luôn lắng nghe ý kiến đóng góp từ bạn và không ngừng cải thiện ứng dụng. Nếu bạn có bất kỳ góp ý, câu hỏi hay đề xuất nào, hãy liên hệ với chúng tôi. Chúng tôi luôn sẵn sàng hỗ trợ bạn và cam kết mang đến dịch vụ tốt nhất có thể.',
+              style: TextStyle(fontSize: 16.0),
+            ),
+            SizedBox(height: 16.0),
+            Text(
+              'Cảm ơn bạn đã lựa chọn ứng dụng của chúng tôi! Chúng tôi hy vọng bạn sẽ có trải nghiệm tuyệt vời với các món ăn và dịch vụ khách sạn.',
+              style: TextStyle(fontSize: 16.0),
+            ),
+            SizedBox(height: 16.0),
+            Text(
+              'Trân trọng,',
+              style: TextStyle(fontSize: 16.0),
+            ),
+            SizedBox(height: 16.0),
+            Text(
+              'Đội ngũ HomeFood',
+              style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),
+            ),
+          ],
+        ),
+      ),
+    );
   }
 }

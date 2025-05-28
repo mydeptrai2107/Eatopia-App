@@ -120,62 +120,52 @@ class Db {
 
   Future<List<SearchResult>> searchRestauarants(String query) async {
     query = query.toLowerCase();
-    //item collection ref
+    final queryWords = query.split(RegExp(r'[\s,-]'));
+
+    // Lấy tất cả các Items
     final itemCollectionRef = db.collectionGroup('Items');
-    final itemQuerySnapshot = await itemCollectionRef
-        .where('nameArray', arrayContainsAny: query.split(RegExp(r'[\s,-]')))
-        .get();
+    final itemQuerySnapshot = await itemCollectionRef.get();
 
     Map<String, SearchResult> restContainingItem = {};
 
     for (final itemDoc in itemQuerySnapshot.docs) {
-      final restDoc = await itemDoc.reference.parent.parent!.get();
-      final restName = restDoc['restaurant'];
-      if (!restContainingItem.containsKey(restName)) {
-        Map<String, dynamic> restDocData = restDoc.data()!;
-        restDocData['id'] = restDoc.id;
-        restContainingItem[restName] =
-            SearchResult(restDoc: restDocData, items: []);
+      final name = itemDoc['name'].toString().toLowerCase();
+
+      // Kiểm tra nếu tên item chứa từ khóa
+      if (queryWords.any((word) => name.contains(word))) {
+        final restDoc = await itemDoc.reference.parent.parent!.get();
+        final restName = restDoc['restaurant'];
+
+        if (!restContainingItem.containsKey(restName)) {
+          Map<String, dynamic> restDocData = restDoc.data()!;
+          restDocData['id'] = restDoc.id;
+          restContainingItem[restName] =
+              SearchResult(restDoc: restDocData, items: []);
+        }
+
+        restContainingItem[restName]!.items.add(Item(
+              itemId: itemDoc.id,
+              name: itemDoc['name'],
+              price: itemDoc['price'],
+              desc: itemDoc['desc'],
+              imageURL: itemDoc['ImageURL'],
+              addOns: itemDoc['addOns'],
+              category: itemDoc['category'],
+            ));
       }
-      restContainingItem[restName]!.items.add(Item(
-            itemId: itemDoc.id,
-            name: itemDoc['name'],
-            price: itemDoc['price'],
-            desc: itemDoc['desc'],
-            imageURL: itemDoc['ImageURL'],
-            addOns: itemDoc['addOns'],
-            category: itemDoc['category'],
-          ));
     }
 
-    //Gets Restaurants that start with the query
-    // final resultPrefixed = await db
-    //     .collection('Restaurants')
-    //     .where('restaurantLower', isGreaterThanOrEqualTo: query)
-    //     .where('restaurantLower', isLessThanOrEqualTo: '$query\uf8ff')
-    //     .get();
+    // Lấy tất cả các Restaurants
+    final allRestaurantsSnapshot = await db.collection('Restaurants').get();
 
-    final resultContains = await db
-        .collection('Restaurants')
-        .where('restaurantArray',
-            arrayContainsAny: query.split(RegExp(r'[\s,-]')))
-        .get();
+    for (final doc in allRestaurantsSnapshot.docs) {
+      final restName = doc['restaurant'].toString().toLowerCase();
 
-    // for (final doc in resultPrefixed.docs) {
-    //   final restName = doc['restaurant'];
-    //   if (!restContainingItem.containsKey(restName)) {
-    //     Map<String, dynamic> restDocData = doc.data();
-    //     restDocData['id'] = doc.id;
-    //     restContainingItem[restName] =
-    //         SearchResult(restDoc: restDocData, items: []);
-    //   }
-    // }
-
-    for (final doc in resultContains.docs) {
-      final restName = doc['restaurant'];
-      if (!restContainingItem.containsKey(restName)) {
-        restContainingItem[restName] =
-            SearchResult(restDoc: doc.data(), items: []);
+      if (queryWords.any((word) => restName.contains(word))) {
+        if (!restContainingItem.containsKey(doc['restaurant'])) {
+          restContainingItem[doc['restaurant']] =
+              SearchResult(restDoc: doc.data(), items: []);
+        }
       }
     }
 

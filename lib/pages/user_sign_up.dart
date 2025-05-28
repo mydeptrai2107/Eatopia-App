@@ -36,12 +36,15 @@ class _UserSignUpPageOneState extends State<UserSignUpPageOne> {
               Row(mainAxisAlignment: MainAxisAlignment.center, children: const [
             Image(image: AssetImage('images/eatopia.png'), height: 50),
             SizedBox(width: 10),
-            Text('EATOPIA',
-                style: TextStyle(
-                    color: Colors.black,
-                    letterSpacing: 2,
-                    fontSize: 30,
-                    fontWeight: FontWeight.bold))
+            Text(
+              'HOMEFOOD',
+              style: TextStyle(
+                color: Colors.black,
+                letterSpacing: 2,
+                fontSize: 24,
+                fontWeight: FontWeight.bold,
+              ),
+            )
           ])),
       body: Container(
         padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -49,7 +52,7 @@ class _UserSignUpPageOneState extends State<UserSignUpPageOne> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             const Text(
-              'Sign Up',
+              'Đăng ký',
               style: TextStyle(
                 fontSize: 40,
                 fontWeight: FontWeight.bold,
@@ -69,13 +72,13 @@ class _UserSignUpPageOneState extends State<UserSignUpPageOne> {
                           size: 20,
                         ),
                         labelText: 'Email',
-                        hintText: 'Enter your email',
+                        hintText: 'Nhập email của bạn',
                         validator: (value) {
                           if (value!.isEmpty) {
-                            return 'Please enter your email';
+                            return 'Vui lòng nhập email của bạn';
                           }
                           if (!EmailValidator.validate(value)) {
-                            return 'Please enter a valid email';
+                            return 'Vui lòng nhập email hợp lệ';
                           }
                           return null;
                         },
@@ -119,7 +122,7 @@ class _UserSignUpPageOneState extends State<UserSignUpPageOne> {
                           topRight: Radius.circular(10),
                         ),
                       ),
-                      content: const Text('Email already exists'),
+                      content: const Text('Email đã tồn tại'),
                     ),
                   );
                   setState(() {
@@ -139,13 +142,18 @@ class _UserSignUpPageOneState extends State<UserSignUpPageOne> {
                       strokeWidth: 1.2,
                       color: Colors.white,
                     )
-                  : const Text('Continue'),
+                  : const Text(
+                      'Tiếp tục',
+                      style: TextStyle(
+                        color: Colors.white,
+                      ),
+                    ),
             ),
 
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const Text('Already have an account?'),
+                const Text('Đã có tài khoản?'),
                 TextButton(
                   style: ButtonStyle(
                     foregroundColor:
@@ -155,7 +163,7 @@ class _UserSignUpPageOneState extends State<UserSignUpPageOne> {
                     Navigator.pushReplacementNamed(context, '/LoginPage');
                   },
                   child: const Text(
-                    'Log In',
+                    'Đăng nhập',
                     style: TextStyle(fontWeight: FontWeight.bold),
                   ),
                 )
@@ -215,12 +223,15 @@ class _UserSignUpPageTwoState extends State<UserSignUpPageTwo> {
               Row(mainAxisAlignment: MainAxisAlignment.center, children: const [
             Image(image: AssetImage('images/eatopia.png'), height: 50),
             SizedBox(width: 10),
-            Text('EATOPIA',
-                style: TextStyle(
-                    color: Colors.black,
-                    letterSpacing: 2,
-                    fontSize: 30,
-                    fontWeight: FontWeight.bold))
+            Text(
+              'HOMEFOOD',
+              style: TextStyle(
+                color: Colors.black,
+                letterSpacing: 2,
+                fontSize: 25,
+                fontWeight: FontWeight.bold,
+              ),
+            )
           ])),
       body: Container(
         padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -231,7 +242,7 @@ class _UserSignUpPageTwoState extends State<UserSignUpPageTwo> {
               mainAxisSize: MainAxisSize.max,
               children: [
                 const Text(
-                  'Sign Up',
+                  'Đăng ký',
                   style: TextStyle(
                     color: Colors.black,
                     fontSize: 40,
@@ -250,11 +261,11 @@ class _UserSignUpPageTwoState extends State<UserSignUpPageTwo> {
                               Icons.person,
                               color: Colors.black,
                             ),
-                            labelText: 'User Name',
-                            hintText: 'Enter your user name',
+                            labelText: 'Tên của bạn',
+                            hintText: 'Nhập tên của bạn',
                             validator: (value) {
                               if (value!.isEmpty) {
-                                return 'Please enter your user name';
+                                return 'Vui lòng nhập tên của bạn';
                               }
                               return null;
                             },
@@ -266,32 +277,32 @@ class _UserSignUpPageTwoState extends State<UserSignUpPageTwo> {
                         PasswordTextField(
                             validator: (value) {
                               if (value!.isEmpty) {
-                                return 'Please enter your password';
+                                return 'Vui lòng nhập mật khẩu của bạn';
                               }
                               if (value.length < 6) {
-                                return 'Password must be at least 6 characters';
+                                return 'Mật khẩu phải có ít nhất 6 chữ số';
                               }
                               return null;
                             },
-                            labelText: 'Password',
-                            hintText: 'Enter your password',
+                            labelText: 'Mật khẩu',
+                            hintText: 'Nhập mật khẩu của bạn',
                             passwordController: passwordController,
                             boxPassH: 100,
                             primaryColor: _primaryColor),
                         const SizedBox(height: 20),
                         //Confirm PASSWORD TEXT FIELD
                         PasswordTextField(
-                          labelText: 'Confirm',
-                          hintText: 'Enter your password again',
+                          labelText: 'Xác nhận',
+                          hintText: 'Nhập lại mật khẩu của bạn',
                           passwordController: confirmPasswordController,
                           boxPassH: 100,
                           primaryColor: _primaryColor,
                           validator: (value) {
                             if (value!.isEmpty) {
-                              return 'Please enter your password again';
+                              return 'Vui lòng nhập lại mật khẩu của bạn';
                             }
                             if (value != passwordController.text) {
-                              return 'Passwords do not match';
+                              return 'Mật khẩu không khớp';
                             }
                             return null;
                           },
@@ -304,14 +315,14 @@ class _UserSignUpPageTwoState extends State<UserSignUpPageTwo> {
                               Icons.phone,
                               color: Colors.black,
                             ),
-                            labelText: 'Phone Number',
-                            hintText: 'Enter your phone number',
+                            labelText: 'Số điện thoại',
+                            hintText: 'Nhập lại số điện thoại của bạn',
                             validator: (value) {
                               if (value!.isEmpty) {
-                                return 'Please enter your phone number';
+                                return 'Vui lòng nhập số điện thoại của bạn';
                               } else if (int.tryParse(value) == null ||
                                   value.length < 10) {
-                                return 'Please enter a valid phone number';
+                                return 'Vui lòng nhập số điện thoại hợp lệ';
                               }
                               return null;
                             },
@@ -328,11 +339,11 @@ class _UserSignUpPageTwoState extends State<UserSignUpPageTwo> {
                               Icons.location_on,
                               color: Colors.black,
                             ),
-                            labelText: 'Address',
-                            hintText: 'Select your address',
+                            labelText: 'Địa chỉ',
+                            hintText: 'Chọn địa chỉ của bạn',
                             validator: (value) {
                               if (value!.isEmpty) {
-                                return 'Please Select your address';
+                                return 'Vui lòng chọn địa chỉ của bạn';
                               }
                               return null;
                             },
@@ -363,70 +374,78 @@ class _UserSignUpPageTwoState extends State<UserSignUpPageTwo> {
                       }
                     },
                     child: Text(
-                      'Select Location from Maps',
-                      style:
-                          TextStyle(color: appGreen, fontFamily: 'ubuntu-bold'),
+                      'Chọn vị trí từ bản đồ',
+                      style: TextStyle(
+                        color: appGreen,
+                        fontFamily: 'ubuntu-bold',
+                      ),
                     )),
                 const SizedBox(height: 20),
                 ElevatedButton(
-                    style: ButtonStyle(
-                        backgroundColor:
-                            WidgetStateProperty.all<Color>(_primaryColor),
-                        fixedSize: WidgetStateProperty.all<Size>(Size(
-                            MediaQuery.of(context).size.width / 3,
-                            MediaQuery.of(context).size.height / 18)),
-                        shape: WidgetStateProperty.all<RoundedRectangleBorder>(
-                          RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10.0),
-                          ),
-                        )),
-                    onPressed: () async {
-                      if (!_formKey.currentState!.validate()) {
-                        return;
-                      }
-                      setState(() {
-                        isLoading = true;
-                      });
-                      await AuthServices().signUpwithEmail(
-                          userData['email'], passwordController.text);
-                      await AuthServices().addCustomers({
-                        'name': userNameController.text,
-                        'email': userData['email'],
-                        'phone': phoneController.text,
-                        'stAddress': addressController.text,
-                      });
-                      showDialog(
-                          context: context,
-                          builder: (context) {
-                            return AlertDialog(
-                              shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(10)),
-                              title: const Text('Registered successfully'),
-                              content: const Text(
-                                'You have successfully registered an account',
-                              ),
-                            );
-                          });
-                      await Future.delayed(Duration(seconds: 1));
-
-                      Navigator.pop(context);
-
-                      setState(() {
-                        isLoading = false;
-                      });
-                      Navigator.pushReplacement(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => LoginPage(),
+                  style: ButtonStyle(
+                      backgroundColor:
+                          WidgetStateProperty.all<Color>(_primaryColor),
+                      fixedSize: WidgetStateProperty.all<Size>(Size(
+                          MediaQuery.of(context).size.width / 3,
+                          MediaQuery.of(context).size.height / 18)),
+                      shape: WidgetStateProperty.all<RoundedRectangleBorder>(
+                        RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10.0),
                         ),
-                      );
-                    },
-                    child: isLoading
-                        ? const CircularProgressIndicator(
-                            strokeWidth: 1,
+                      )),
+                  onPressed: () async {
+                    if (!_formKey.currentState!.validate()) {
+                      return;
+                    }
+                    setState(() {
+                      isLoading = true;
+                    });
+                    await AuthServices().signUpwithEmail(
+                        userData['email'], passwordController.text);
+                    await AuthServices().addCustomers({
+                      'name': userNameController.text,
+                      'email': userData['email'],
+                      'phone': phoneController.text,
+                      'stAddress': addressController.text,
+                    });
+                    showDialog(
+                        context: context,
+                        builder: (context) {
+                          return AlertDialog(
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(10)),
+                            title: const Text('Đã đăng ký thành công'),
+                            content: const Text(
+                              'Bạn đã đăng ký tài khoản thành công',
+                            ),
+                          );
+                        });
+                    await Future.delayed(Duration(seconds: 1));
+
+                    Navigator.pop(context);
+
+                    setState(() {
+                      isLoading = false;
+                    });
+                    Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => LoginPage(),
+                      ),
+                    );
+                  },
+                  child: isLoading
+                      ? const CircularProgressIndicator(
+                          strokeWidth: 1,
+                          color: Colors.white,
+                        )
+                      : const Text(
+                          'Đăng ký',
+                          style: TextStyle(
                             color: Colors.white,
-                          )
-                        : const Text('Sign Up')),
+                          ),
+                        ),
+                ),
               ],
             ),
           ),

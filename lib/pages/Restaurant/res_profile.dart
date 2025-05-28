@@ -177,11 +177,11 @@ class _ResProfileState extends State<ResProfile> {
             child: ListView(
               children: [
                 buildCard(
-                  title: 'Information',
+                  title: 'Thông tin',
                   child: Column(
                     children: [
                       buildInfoRow(
-                        label: 'Name',
+                        label: 'Tên',
                         value: _name ?? '',
                       ),
                       buildInfoRow(
@@ -189,11 +189,11 @@ class _ResProfileState extends State<ResProfile> {
                         value: _email ?? '',
                       ),
                       buildInfoRow(
-                        label: 'Phone Number',
+                        label: 'Số điện thoại',
                         value: _phoneNumber ?? '',
                       ),
                       buildInfoRow(
-                        label: 'Address',
+                        label: 'Địa chỉ',
                         value: _address ?? '',
                       ),
                       const SizedBox(height: 20),
@@ -207,7 +207,7 @@ class _ResProfileState extends State<ResProfile> {
                               backgroundColor: Colors.green,
                               foregroundColor: Colors.white,
                             ),
-                            child: const Text('Edit'),
+                            child: const Text('Chỉnh sửa'),
                           ),
                         ],
                       ),

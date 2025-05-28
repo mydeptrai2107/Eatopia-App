@@ -23,7 +23,7 @@ class _ResOrdersState extends State<ResOrders> {
       child: SingleChildScrollView(
         child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
           const Text(
-            'Current Orders',
+            'Đơn hàng hiện tại',
             style: TextStyle(fontFamily: 'ubuntu-bold', fontSize: 20),
           ),
           const SizedBox(height: 10),
@@ -34,7 +34,7 @@ class _ResOrdersState extends State<ResOrders> {
           }),
           const SizedBox(height: 20),
           const Text(
-            'Past Orders',
+            'Đơn đặt hàng trước đây',
             style: TextStyle(fontFamily: 'ubuntu-bold', fontSize: 20),
           ),
           const SizedBox(height: 10),
@@ -57,7 +57,6 @@ class _CurrentOrderState extends State<CurrentOrder> {
   bool isLoading = true;
   List<DocumentSnapshot> orders = [];
   List<String> userNames = [];
-  final dropDownKey = GlobalKey<FormFieldState>();
 
   void getOrders() async {
     final String uid = AuthServices().auth.currentUser!.uid;
@@ -116,7 +115,7 @@ class _CurrentOrderState extends State<CurrentOrder> {
                     ),
                     child: const Center(
                         child: Text(
-                      'No Current Orders!',
+                      'Không có đơn hàng hiện tại!',
                       style: TextStyle(fontSize: 20),
                     )));
               }
@@ -139,30 +138,30 @@ class _CurrentOrderState extends State<CurrentOrder> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     const Text(
-                      'Customer Details',
+                      'Chi tiết khách hàng',
                       style: TextStyle(fontFamily: 'ubuntu-bold', fontSize: 20),
                     ),
                     const SizedBox(height: 10),
                     Text(
-                      'Name: ${userNames[index]}',
+                      'Tên: ${userNames[index]}',
                       style:
                           const TextStyle(fontFamily: 'ubuntu', fontSize: 15),
                     ),
                     const SizedBox(height: 10),
                     Text(
-                      'Address: ${orders[index]['userAddress'] ?? 'Not Provided'}',
+                      'Địa chỉ: ${orders[index]['userAddress'] ?? 'Not Provided'}',
                       style:
                           const TextStyle(fontFamily: 'ubuntu', fontSize: 15),
                     ),
                     const SizedBox(height: 10),
                     Text(
-                      'Phone: ${orders[index]['phone'] ?? 'Not Provided'}',
+                      'Số điện thoại: ${orders[index]['phone'] ?? 'Not Provided'}',
                       style:
                           const TextStyle(fontFamily: 'ubuntu', fontSize: 15),
                     ),
                     const SizedBox(height: 10),
                     const Text(
-                      'Order Summary',
+                      'Tổng quan đơn hàng',
                       style: TextStyle(fontFamily: 'ubuntu-bold', fontSize: 20),
                     ),
                     const SizedBox(height: 10),
@@ -208,7 +207,7 @@ class _CurrentOrderState extends State<CurrentOrder> {
                     Row(
                       children: [
                         const Text(
-                          'Total',
+                          'Tổng',
                           style: TextStyle(
                               fontFamily: 'ubuntu-bold', fontSize: 20),
                         ),
@@ -235,7 +234,7 @@ class _CurrentOrderState extends State<CurrentOrder> {
                     const SizedBox(height: 10),
                     const Divider(),
                     const Text(
-                      'Status:',
+                      'Trạng thái:',
                       style: TextStyle(
                         fontSize: 20,
                         fontFamily: 'ubuntu-bold',
@@ -251,16 +250,15 @@ class _CurrentOrderState extends State<CurrentOrder> {
                         borderRadius: BorderRadius.circular(10),
                       ),
                       child: DropdownButtonFormField(
-                        key: dropDownKey,
                         onChanged: (value) async {
                           //Show a Dialog Box to Confirm
                           bool? result = await showDialog(
                               context: context,
                               builder: (context) {
                                 return AlertDialog(
-                                  title: const Text('Confirm'),
+                                  title: const Text('Xác nhận'),
                                   content: const Text(
-                                      'Are you sure you want to change the status?'),
+                                      'Bạn có chắc chắn muốn thay đổi trạng thái'),
                                   actions: [
                                     TextButton(
                                         onPressed: () {
@@ -276,7 +274,6 @@ class _CurrentOrderState extends State<CurrentOrder> {
                                 );
                               });
                           if (result == null || !result) {
-                            dropDownKey.currentState!.reset();
                             return;
                           } else {
                             await Db().updateOrderStatus(
@@ -315,9 +312,9 @@ class _CurrentOrderState extends State<CurrentOrder> {
                             context: context,
                             builder: (context) {
                               return AlertDialog(
-                                title: const Text('Confirm'),
+                                title: const Text('Xác nhận'),
                                 content: const Text(
-                                    'Are you sure you want to cancel the order?'),
+                                    'Bạn có chắc chắn muốn hủy đơn hàng'),
                                 actions: [
                                   TextButton(
                                       onPressed: () {
@@ -346,7 +343,7 @@ class _CurrentOrderState extends State<CurrentOrder> {
                             widget.onTap();
                           }
                         },
-                        child: const Text('Cancel')),
+                        child: const Text('Hủy')),
                   ],
                 ),
               );

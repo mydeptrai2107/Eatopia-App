@@ -60,17 +60,17 @@ class _SearchResultsPageState extends State<SearchResultsPage> {
                         ),
                         const SizedBox(height: 16),
                         const Text(
-                          'No results found',
+                          'Không tìm thấy kết quả nào',
                           style: TextStyle(
-                            fontSize: 28,
+                            fontSize: 20,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
                         const SizedBox(height: 8),
                         Text(
-                          '(Please try a different search term)',
+                          '(Vui lòng thử một thuật ngữ tìm kiếm khác)',
                           style:
-                              TextStyle(fontSize: 18, color: Colors.grey[600]),
+                              TextStyle(fontSize: 15, color: Colors.grey[600]),
                         ),
                       ],
                     ),
@@ -81,9 +81,9 @@ class _SearchResultsPageState extends State<SearchResultsPage> {
                     children: [
                       const SizedBox(height: 10),
                       Text(
-                        '${results.length} Search Results for "${widget.query}"',
+                        '${results.length} kết quả tìm kiếm cho "${widget.query}"',
                         style: const TextStyle(
-                          fontSize: 24,
+                          fontSize: 20,
                           fontFamily: 'ubuntu-bold',
                         ),
                       ),
@@ -99,7 +99,8 @@ class _SearchResultsPageState extends State<SearchResultsPage> {
                         builder: (context) => UserRestauarantPage(data: {
                           'id': results[index].restDoc['id'],
                           'restaurant': results[index].restDoc['restaurant'],
-                          'image': results[index].restDoc['ImageURL'] ?? 'https://i.pinimg.com/736x/49/e5/8d/49e58d5922019b8ec4642a2e2b9291c2.jpg',
+                          'image': results[index].restDoc['ImageURL'] ??
+                              'https://i.pinimg.com/736x/49/e5/8d/49e58d5922019b8ec4642a2e2b9291c2.jpg',
                           'description': results[index].restDoc['description'],
                         }),
                       ),

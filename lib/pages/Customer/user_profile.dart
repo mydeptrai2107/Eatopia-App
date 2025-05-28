@@ -44,13 +44,13 @@ class _UserProfileState extends State<UserProfile> {
         context: context,
         builder: (BuildContext context) {
           return AlertDialog(
-            title: const Text('Edit User Data'),
+            title: const Text('Chỉnh sửa dữ liệu người dùng'),
             content: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
                 TextField(
                   decoration: InputDecoration(
-                    labelText: 'Name',
+                    labelText: 'Tên',
                     hintText: _name,
                   ),
                   onChanged: (value) {
@@ -61,7 +61,7 @@ class _UserProfileState extends State<UserProfile> {
                 ),
                 TextField(
                   decoration: InputDecoration(
-                    labelText: 'Phone Number',
+                    labelText: 'Số điện thoại',
                     hintText: _phoneNumber,
                   ),
                   onChanged: (value) {
@@ -72,7 +72,7 @@ class _UserProfileState extends State<UserProfile> {
                 ),
                 TextField(
                   decoration: InputDecoration(
-                    labelText: 'Address',
+                    labelText: 'Địa chỉ',
                     hintText: _address,
                   ),
                   onChanged: (value) {
@@ -88,7 +88,7 @@ class _UserProfileState extends State<UserProfile> {
                 onPressed: () {
                   Navigator.of(context).pop();
                 },
-                child: const Text('Cancel'),
+                child: const Text('Hủy'),
               ),
               ElevatedButton(
                 onPressed: () async {
@@ -105,7 +105,7 @@ class _UserProfileState extends State<UserProfile> {
                   _getUserData();
                   Navigator.of(context).pop();
                 },
-                child: const Text('Save'),
+                child: const Text('Lưu'),
               ),
             ],
           );
@@ -158,7 +158,7 @@ class _UserProfileState extends State<UserProfile> {
             child: ListView(
               children: [
                 buildCard(
-                  title: 'Information',
+                  title: 'Thông tin',
                   child: Column(
                     children: [
                       buildInfoRow(
@@ -166,11 +166,11 @@ class _UserProfileState extends State<UserProfile> {
                         value: _email ?? '',
                       ),
                       buildInfoRow(
-                        label: 'Phone Number',
+                        label: 'Số điện thoại',
                         value: _phoneNumber ?? 'Not set',
                       ),
                       buildInfoRow(
-                        label: 'Address',
+                        label: 'Địa chỉ',
                         value: _address ?? '',
                       ),
                       const SizedBox(height: 20),
@@ -184,7 +184,7 @@ class _UserProfileState extends State<UserProfile> {
                               backgroundColor: appGreen,
                               foregroundColor: Colors.white,
                             ),
-                            child: const Text('Edit'),
+                            child: const Text('Chỉnh sửa'),
                           ),
                         ],
                       ),

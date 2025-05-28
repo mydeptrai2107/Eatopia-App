@@ -13,9 +13,9 @@ class UserHomePage extends StatefulWidget {
 
 class _UserHomePageState extends State<UserHomePage> {
   List<Widget> headings = [
-    const Text('Home'),
-    const Text('Cart'),
-    const Text('More')
+    const Text('Trang chủ'),
+    const Text('Giỏ hàng'),
+    const Text('Cài đặt')
   ];
   int selectedIndex = 0;
   final pageController = PageController();
@@ -33,7 +33,7 @@ class _UserHomePageState extends State<UserHomePage> {
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
-            label: 'Home',
+            label: 'Trang chủ',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.shopping_cart),

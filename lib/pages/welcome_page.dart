@@ -36,7 +36,7 @@ class WelcomePage extends StatelessWidget {
                   // change background color of button
                   backgroundColor: appGreen, // change text color of button
                 ),
-                child: const Text("Login with Email"),
+                child: const Text("Đăng nhập với Email"),
               ),
             ),
             Container(
@@ -53,7 +53,7 @@ class WelcomePage extends StatelessWidget {
                   // change background color of button
                   backgroundColor: appGreen, // change text color of button
                 ),
-                child: const Text("Sign up with Email"),
+                child: const Text("Đăng ký với Email"),
               ),
             ),
             Container(
@@ -71,7 +71,7 @@ class WelcomePage extends StatelessWidget {
                   // change background color of button
                   backgroundColor: appGreen, // change text color of button
                 ),
-                child: const Text("Continue as Guest"),
+                child: const Text("Tiếp tục với khách"),
               ),
             ),
             Container(
@@ -114,7 +114,7 @@ class WelcomePage extends StatelessWidget {
                 Navigator.pushReplacementNamed(context, '/UserHomePage');
               },
               label: const Text(
-                "Continue with Google",
+                "Tiếp tục với Google",
                 style: TextStyle(color: Colors.black, fontSize: 15),
               ),
               icon: Image.asset(

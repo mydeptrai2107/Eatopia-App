@@ -69,27 +69,28 @@ class _ResItemsPageState extends State<ResItemsPage>
                       child: Column(
                         children: [
                           ElevatedButton(
-                              style: ElevatedButton.styleFrom(
-                                backgroundColor: Colors.white,
-                                fixedSize:
-                                    Size(MediaQuery.of(context).size.width, 50),
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(10),
-                                ),
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: Colors.white,
+                              fixedSize:
+                                  Size(MediaQuery.of(context).size.width, 50),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(10),
                               ),
-                              onPressed: () {
-                                showDialog(
-                                  context: context,
-                                  builder: buildCreateCtgAlert,
-                                );
-                              },
-                              child: const Text(
-                                'Create New Category',
-                                style: TextStyle(
-                                    fontFamily: 'ubuntu-bold',
-                                    color: Colors.black,
-                                    fontSize: 16),
-                              )),
+                            ),
+                            onPressed: () {
+                              showDialog(
+                                context: context,
+                                builder: buildCreateCtgAlert,
+                              );
+                            },
+                            child: const Text(
+                              'Tạo danh mục mới',
+                              style: TextStyle(
+                                  fontFamily: 'ubuntu-bold',
+                                  color: Colors.black,
+                                  fontSize: 16),
+                            ),
+                          ),
                           const SizedBox(height: 10),
                           ElevatedButton(
                               style: ElevatedButton.styleFrom(
@@ -115,7 +116,7 @@ class _ResItemsPageState extends State<ResItemsPage>
                                 }
                               },
                               child: const Text(
-                                'Add New Item',
+                                'Thêm món mới',
                                 style: TextStyle(
                                     fontFamily: 'ubuntu-bold',
                                     color: Colors.black,
@@ -199,20 +200,20 @@ class _ResItemsPageState extends State<ResItemsPage>
     final categoryControl = TextEditingController();
     return AlertDialog(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-      title: const Text('Create Category'),
+      title: const Text('Tạo danh mục'),
       content: TextField(
         controller: categoryControl,
-        decoration: const InputDecoration(hintText: 'Category Name'),
+        decoration: const InputDecoration(hintText: 'Tên danh mục'),
       ),
       actions: [
         TextButton(
-          child: const Text('CANCEL'),
+          child: const Text('Hủy'),
           onPressed: () {
             Navigator.of(context).pop();
           },
         ),
         TextButton(
-          child: const Text('CREATE'),
+          child: const Text('Tạo'),
           onPressed: () async {
             await addCategory(categoryControl.text);
             Navigator.of(context).pop();
@@ -231,14 +232,14 @@ Widget buildEditCtg(
   categoryControl.text = categories[index];
   return AlertDialog(
     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-    title: const Text('Edit Category'),
+    title: const Text('Chỉnh sửa danh mục'),
     content: TextField(
       controller: categoryControl,
-      decoration: const InputDecoration(hintText: 'Category Name'),
+      decoration: const InputDecoration(hintText: 'Tên danh mục'),
     ),
     actions: [
       TextButton(
-        child: const Text('CANCEL'),
+        child: const Text('Hủy'),
         onPressed: () {
           if (!isEnabled) {
             return;
@@ -247,7 +248,7 @@ Widget buildEditCtg(
         },
       ),
       TextButton(
-        child: const Text('EDIT'),
+        child: const Text('Chỉnh sửa'),
         onPressed: () async {
           if (!isEnabled) {
             return;

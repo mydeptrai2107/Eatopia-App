@@ -105,32 +105,34 @@ class _MapScreenState extends State<MapScreen> {
       persistentFooterAlignment: AlignmentDirectional.center,
       persistentFooterButtons: [
         ElevatedButton(
-            style: ElevatedButton.styleFrom(
-              fixedSize: Size(MediaQuery.of(context).size.width, 60),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(10.0),
-              ),
-              backgroundColor: appGreen,
+          style: ElevatedButton.styleFrom(
+            fixedSize: Size(MediaQuery.of(context).size.width, 60),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(10.0),
             ),
-            onPressed: () async {
-              List<Placemark> place = await placemarkFromCoordinates(
-                  _marker.position.latitude, _marker.position.longitude);
+            backgroundColor: appGreen,
+          ),
+          onPressed: () async {
+            List<Placemark> place = await placemarkFromCoordinates(
+                _marker.position.latitude, _marker.position.longitude);
 
-              setState(() {
-                locTxt =
-                    '${place[0].street}, ${place[0].subLocality}, ${place[0].subAdministrativeArea}';
-              });
-              Navigator.pop(context, locTxt);
-            },
-            child: const Text(
-              'Confirm Location',
-              style: TextStyle(
-                fontSize: 20,
-              ),
-            ))
+            setState(() {
+              locTxt =
+                  '${place[0].street}, ${place[0].subLocality}, ${place[0].subAdministrativeArea}';
+            });
+            Navigator.pop(context, locTxt);
+          },
+          child: const Text(
+            'Xác nhận vị trí',
+            style: TextStyle(
+              fontSize: 20,
+              color: Colors.white,
+            ),
+          ),
+        )
       ],
       appBar: AppBar(
-          title: const Text('Select your Location'),
+          title: const Text('Chọn vị trí của bạn'),
           backgroundColor: appGreen,
           bottom: PreferredSize(
             preferredSize: const Size.fromHeight(60),
@@ -175,7 +177,7 @@ class _MapScreenState extends State<MapScreen> {
                 decoration: InputDecoration(
                   fillColor: Colors.white,
                   filled: true,
-                  hintText: 'Search for your location',
+                  hintText: 'Tìm kiếm vị trí của bạn',
                   prefixIcon: const Icon(Icons.search),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(10.0),
@@ -287,7 +289,7 @@ class _MapSearchPageState extends State<MapSearchPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Search Location'),
+        title: const Text('Tìm kiếm vị trí'),
         backgroundColor: appGreen,
         bottom: PreferredSize(
           preferredSize: const Size.fromHeight(60),
@@ -299,7 +301,7 @@ class _MapSearchPageState extends State<MapSearchPage> {
               decoration: InputDecoration(
                 fillColor: Colors.white,
                 filled: true,
-                hintText: 'Search for your location',
+                hintText: 'Tìm kiếm vị trí của bạn',
                 prefixIcon: const Icon(Icons.search),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(10.0),
