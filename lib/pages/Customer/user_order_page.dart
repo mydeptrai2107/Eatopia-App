@@ -1,7 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:eatopia/pages/Customer/widgets/order_item_widget.dart';
 import 'package:eatopia/services/auth_services.dart';
+import 'package:eatopia/utilities/colours.dart';
 import 'package:eatopia/utilities/custom_shimmer.dart';
-import 'package:eatopia/utilities/order_item.dart';
 import 'package:flutter/material.dart';
 
 class UserOrder extends StatefulWidget {
@@ -14,32 +15,52 @@ class UserOrder extends StatefulWidget {
 class _UserOrderState extends State<UserOrder> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Đơn hàng của tôi'),
-      ),
-      body: Container(
-        height: MediaQuery.of(context).size.height,
-        width: MediaQuery.of(context).size.width,
-        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-        child: SingleChildScrollView(
+    return DefaultTabController(
+      initialIndex: 0,
+      length: 2,
+      child: Scaffold(
+        appBar: AppBar(
+          title: Text("Đơn hàng"),
+        ),
+        body: Container(
+          height: MediaQuery.of(context).size.height,
+          width: MediaQuery.of(context).size.width,
+          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
           child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: const [
-                Text(
-                  'Đơn hàng hiện tại',
-                  style: TextStyle(fontFamily: 'ubuntu-bold', fontSize: 20),
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              TabBar(
+                labelColor: colorPrimary,
+                indicatorColor: colorPrimary,
+                tabs: [
+                  Tab(
+                    child: Text(
+                      'Đang diễn ra',
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                  Tab(
+                    child: Text(
+                      'Lịch sử',
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              Expanded(
+                child: TabBarView(
+                  children: [
+                    CurrentOrder(),
+                    PastOrder(),
+                  ],
                 ),
-                SizedBox(height: 10),
-                CurrentOrder(),
-                SizedBox(height: 20),
-                Text(
-                  'Đơn hàng trước đây',
-                  style: TextStyle(fontFamily: 'ubuntu-bold', fontSize: 20),
-                ),
-                SizedBox(height: 10),
-                PastOrder(),
-              ]),
+              ),
+            ],
+          ),
         ),
       ),
     );
@@ -86,146 +107,22 @@ class _CurrentOrderState extends State<CurrentOrder> {
         : ListView.builder(
             itemCount: orders.isEmpty ? 1 : orders.length,
             shrinkWrap: true,
-            physics: const NeverScrollableScrollPhysics(),
             itemBuilder: (context, index) {
               if (orders.isEmpty) {
-                return Container(
-                  height: 50,
-                  decoration: BoxDecoration(
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.grey.withAlpha(50),
-                        spreadRadius: 1,
-                        blurRadius: 1,
-                        offset:
-                            const Offset(2, 3), // changes position of shadow
-                      ),
-                    ],
-                    borderRadius: BorderRadius.circular(10),
-                    color: Colors.white,
-                  ),
+                return SizedBox(
+                  height: MediaQuery.sizeOf(context).width,
                   child: const Center(
                     child: Text(
                       'Không có đơn hàng trước đây!',
-                      style: TextStyle(fontSize: 18),
+                      style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                   ),
                 );
               }
-              return Container(
-                padding: const EdgeInsets.all(10),
-                margin: const EdgeInsets.symmetric(vertical: 5),
-                decoration: BoxDecoration(
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.grey.withAlpha(50),
-                      spreadRadius: 1,
-                      blurRadius: 1,
-                      offset: const Offset(2, 3), // changes position of shadow
-                    ),
-                  ],
-                  borderRadius: BorderRadius.circular(10),
-                  color: Colors.white,
-                ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const Text(
-                      'Tóm tắt đơn hàng',
-                      style: TextStyle(fontFamily: 'ubuntu-bold', fontSize: 20),
-                    ),
-                    const SizedBox(height: 10),
-                    ListView.builder(
-                      shrinkWrap: true,
-                      physics: const NeverScrollableScrollPhysics(),
-                      itemCount: orders[index]['orderItems'].length,
-                      itemBuilder: (context, index2) {
-                        OrderItem orderItem = OrderItem(
-                          restId: orders[index]['orderItems'][index2]['restId'],
-                          itemId: orders[index]['orderItems'][index2]['itemId'],
-                          id: '',
-                          title: orders[index]['orderItems'][index2]['title'],
-                          spcInstr: orders[index]['orderItems'][index2]
-                              ['spcInstr'],
-                          quantity: orders[index]['orderItems'][index2]
-                              ['quantity'],
-                          basePrice: orders[index]['orderItems'][index2]
-                              ['basePrice'],
-                          addOns: orders[index]['orderItems'][index2]['addOns'],
-                        );
-                        return ListTile(
-                          title: Text(
-                            orderItem.title,
-                            style: const TextStyle(
-                                fontFamily: 'ubuntu', fontSize: 15),
-                          ),
-                          subtitle: Text(
-                            'Rs. ${orderItem.totalPrice}',
-                            style: const TextStyle(
-                                fontFamily: 'ubuntu', fontSize: 15),
-                          ),
-                          trailing: Text(
-                            'x${orderItem.quantity}',
-                            style: const TextStyle(
-                                fontFamily: 'ubuntu', fontSize: 15),
-                          ),
-                        );
-                      },
-                    ),
-                    const Divider(),
-                    const SizedBox(height: 10),
-                    Row(
-                      children: [
-                        const Text(
-                          'Tổng cộng',
-                          style: TextStyle(
-                              fontFamily: 'ubuntu-bold', fontSize: 20),
-                        ),
-                        const Spacer(),
-                        Text(
-                          'Rs. ${orders[index]['orderItems'].fold(0.0, (p, c) {
-                            OrderItem orderItem = OrderItem(
-                              restId: c['restId'],
-                              itemId: c['itemId'],
-                              id: '',
-                              title: c['title'],
-                              spcInstr: c['spcInstr'],
-                              quantity: c['quantity'],
-                              basePrice: c['basePrice'],
-                              addOns: c['addOns'],
-                            );
-                            return p + orderItem.totalPrice;
-                          })}',
-                          style: const TextStyle(
-                              fontFamily: 'ubuntu-bold', fontSize: 20),
-                        ),
-                      ],
-                    ),
-                    const SizedBox(height: 10),
-                    const Divider(),
-                    Row(
-                      children: [
-                        const Text(
-                          'Trạng thái:',
-                          style: TextStyle(
-                            fontSize: 20,
-                            fontFamily: 'ubuntu-bold',
-                          ),
-                        ),
-                        const SizedBox(
-                          width: 10,
-                        ),
-                        Text(
-                          orders[index]['status'],
-                          style: const TextStyle(
-                            fontSize: 20,
-                          ),
-                        ),
-                      ],
-                    )
-                  ],
-                ),
-              );
+              return OrderItemWidget(orders[index]);
             },
           );
   }
@@ -271,146 +168,22 @@ class _PastOrderState extends State<PastOrder> {
         : ListView.builder(
             itemCount: orders.isEmpty ? 1 : orders.length,
             shrinkWrap: true,
-            physics: const NeverScrollableScrollPhysics(),
             itemBuilder: (context, index) {
               if (orders.isEmpty) {
-                return Container(
-                  height: 50,
-                  decoration: BoxDecoration(
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.grey.withAlpha(50),
-                        spreadRadius: 1,
-                        blurRadius: 1,
-                        offset:
-                            const Offset(2, 3), // changes position of shadow
-                      ),
-                    ],
-                    borderRadius: BorderRadius.circular(10),
-                    color: Colors.white,
-                  ),
+                return SizedBox(
+                  height: MediaQuery.sizeOf(context).width,
                   child: const Center(
                     child: Text(
                       'Không có đơn hàng trước đây!',
-                      style: TextStyle(fontSize: 18),
+                      style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                   ),
                 );
               }
-              return Container(
-                padding: const EdgeInsets.all(10),
-                margin: const EdgeInsets.symmetric(vertical: 5),
-                decoration: BoxDecoration(
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.grey.withAlpha(50),
-                      spreadRadius: 1,
-                      blurRadius: 1,
-                      offset: const Offset(2, 3), // changes position of shadow
-                    ),
-                  ],
-                  borderRadius: BorderRadius.circular(10),
-                  color: Colors.white,
-                ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const Text(
-                      'Tóm tắt đơn hàng',
-                      style: TextStyle(fontFamily: 'ubuntu-bold', fontSize: 20),
-                    ),
-                    const SizedBox(height: 10),
-                    ListView.builder(
-                      shrinkWrap: true,
-                      physics: const NeverScrollableScrollPhysics(),
-                      itemCount: orders[index]['orderItems'].length,
-                      itemBuilder: (context, index2) {
-                        OrderItem orderItem = OrderItem(
-                          restId: orders[index]['orderItems'][index2]['restId'],
-                          itemId: orders[index]['orderItems'][index2]['itemId'],
-                          id: '',
-                          title: orders[index]['orderItems'][index2]['title'],
-                          spcInstr: orders[index]['orderItems'][index2]
-                              ['spcInstr'],
-                          quantity: orders[index]['orderItems'][index2]
-                              ['quantity'],
-                          basePrice: orders[index]['orderItems'][index2]
-                              ['basePrice'],
-                          addOns: orders[index]['orderItems'][index2]['addOns'],
-                        );
-                        return ListTile(
-                          title: Text(
-                            orderItem.title,
-                            style: const TextStyle(
-                                fontFamily: 'ubuntu', fontSize: 15),
-                          ),
-                          subtitle: Text(
-                            'Rs. ${orderItem.totalPrice}',
-                            style: const TextStyle(
-                                fontFamily: 'ubuntu', fontSize: 15),
-                          ),
-                          trailing: Text(
-                            'x${orderItem.quantity}',
-                            style: const TextStyle(
-                                fontFamily: 'ubuntu', fontSize: 15),
-                          ),
-                        );
-                      },
-                    ),
-                    const Divider(),
-                    const SizedBox(height: 10),
-                    Row(
-                      children: [
-                        const Text(
-                          'Tổng cộng',
-                          style: TextStyle(
-                              fontFamily: 'ubuntu-bold', fontSize: 20),
-                        ),
-                        const Spacer(),
-                        Text(
-                          'Rs. ${orders[index]['orderItems'].fold(0.0, (p, c) {
-                            OrderItem orderItem = OrderItem(
-                              restId: c['restId'],
-                              itemId: c['itemId'],
-                              id: '',
-                              title: c['title'],
-                              spcInstr: c['spcInstr'],
-                              quantity: c['quantity'],
-                              basePrice: c['basePrice'],
-                              addOns: c['addOns'],
-                            );
-                            return p + orderItem.totalPrice;
-                          })}',
-                          style: const TextStyle(
-                              fontFamily: 'ubuntu-bold', fontSize: 20),
-                        ),
-                      ],
-                    ),
-                    const SizedBox(height: 10),
-                    const Divider(),
-                    Row(
-                      children: [
-                        const Text(
-                          'Trạng thái:',
-                          style: TextStyle(
-                            fontSize: 20,
-                            fontFamily: 'ubuntu-bold',
-                          ),
-                        ),
-                        const SizedBox(
-                          width: 10,
-                        ),
-                        Text(
-                          orders[index]['status'],
-                          style: const TextStyle(
-                            fontSize: 20,
-                          ),
-                        ),
-                      ],
-                    )
-                  ],
-                ),
-              );
+              return OrderItemWidget(orders[index]);
             },
           );
   }

@@ -44,7 +44,7 @@ class _ResMoreState extends State<ResMore> {
                   value[index],
                   style: const TextStyle(fontSize: 15),
                 ),
-                tileColor: appGreen,
+                tileColor: colorPrimary,
                 textColor: Colors.white,
                 dense: true,
                 contentPadding: const EdgeInsets.symmetric(
@@ -77,7 +77,7 @@ class _ResMoreState extends State<ResMore> {
                           AuthServices().auth.currentUser!.uid, locTxt);
                       ScaffoldMessenger.of(context).showSnackBar(
                         SnackBar(
-                          backgroundColor: appGreen,
+                          backgroundColor: colorPrimary,
                           content: const Text('Address Updated !'),
                           duration: const Duration(seconds: 2),
                         ),

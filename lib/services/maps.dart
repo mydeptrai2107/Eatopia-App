@@ -110,7 +110,7 @@ class _MapScreenState extends State<MapScreen> {
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(10.0),
             ),
-            backgroundColor: appGreen,
+            backgroundColor: colorPrimary,
           ),
           onPressed: () async {
             List<Placemark> place = await placemarkFromCoordinates(
@@ -133,7 +133,7 @@ class _MapScreenState extends State<MapScreen> {
       ],
       appBar: AppBar(
           title: const Text('Chọn vị trí của bạn'),
-          backgroundColor: appGreen,
+          backgroundColor: colorPrimary,
           bottom: PreferredSize(
             preferredSize: const Size.fromHeight(60),
             child: Padding(
@@ -218,7 +218,7 @@ class _MapScreenState extends State<MapScreen> {
                         ),
                       );
                     },
-                    backgroundColor: appGreen,
+                    backgroundColor: colorPrimary,
                     child: const Icon(
                       Icons.my_location,
                       color: Colors.white,
@@ -290,7 +290,7 @@ class _MapSearchPageState extends State<MapSearchPage> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Tìm kiếm vị trí'),
-        backgroundColor: appGreen,
+        backgroundColor: colorPrimary,
         bottom: PreferredSize(
           preferredSize: const Size.fromHeight(60),
           child: Padding(

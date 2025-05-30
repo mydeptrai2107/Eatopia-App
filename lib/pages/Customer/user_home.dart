@@ -1,5 +1,6 @@
 import 'package:eatopia/pages/Customer/cart.dart';
 import 'package:eatopia/pages/Customer/user_more.dart';
+import 'package:eatopia/pages/Customer/user_order_page.dart';
 import 'package:flutter/material.dart';
 import 'package:eatopia/utilities/colours.dart';
 import 'package:eatopia/pages/Customer/user_main_home.dart';
@@ -15,6 +16,7 @@ class _UserHomePageState extends State<UserHomePage> {
   List<Widget> headings = [
     const Text('Trang chủ'),
     const Text('Giỏ hàng'),
+    const Text('Đơn hàng'),
     const Text('Cài đặt')
   ];
   int selectedIndex = 0;
@@ -37,15 +39,19 @@ class _UserHomePageState extends State<UserHomePage> {
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.shopping_cart),
-            label: 'Cart',
+            label: 'Giỏ hàng',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.list_alt),
+            label: 'Đơn hàng',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.list_outlined),
-            label: 'Profile',
+            label: 'Hồ sơ',
           ),
         ],
         currentIndex: selectedIndex,
-        selectedItemColor: appGreen,
+        selectedItemColor: colorPrimary,
         onTap: (index) => setState(() {
           selectedIndex = index;
           pageController.animateToPage(index,
@@ -53,17 +59,13 @@ class _UserHomePageState extends State<UserHomePage> {
               curve: Curves.easeInOut);
         }),
       ),
-      appBar: AppBar(
-        elevation: 0,
-        title: headings[selectedIndex],
-        backgroundColor: appGreen,
-      ),
       body: PageView(
         physics: const NeverScrollableScrollPhysics(),
         controller: pageController,
         children: const [
           UserMainHome(),
           Cart(),
+          UserOrder(),
           UserMore(),
         ],
       ),

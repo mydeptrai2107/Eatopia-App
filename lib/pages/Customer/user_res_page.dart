@@ -8,10 +8,6 @@ import 'package:eatopia/utilities/colours.dart';
 import 'package:eatopia/utilities/custom_shimmer.dart';
 import 'package:flutter/material.dart';
 
-//Class For Item
-
-//THis is the Customer's view of the restaurant page
-
 class UserRestauarantPage extends StatefulWidget {
   const UserRestauarantPage({super.key, required this.data});
   final Map<String, dynamic> data;
@@ -29,7 +25,6 @@ class _UserRestauarantPageState extends State<UserRestauarantPage>
 
   bool isLoading = true;
 
-  //This functions sets the Map with ctgs as keys and list of items as a value
   void getCtgItems() async {
     ctgItems = await Db().getCtgItems(widget.data['id']);
     setState(() {
@@ -85,14 +80,13 @@ class _UserRestauarantPageState extends State<UserRestauarantPage>
                 child: Text(
                   widget.data['restaurant'],
                   style: const TextStyle(
-                      color: Colors.black,
-                      fontFamily: 'ubuntu-bold',
-                      fontSize: 20),
+                    color: Colors.black,
+                    fontFamily: 'ubuntu-bold',
+                    fontSize: 20,
+                  ),
                 ),
               ),
               forceElevated: true,
-              elevation: 5,
-              //scrolledUnderElevation: 50,
               leading: Padding(
                 padding: const EdgeInsets.only(left: 20.0),
                 child: FloatingActionButton(
@@ -136,21 +130,27 @@ class _UserRestauarantPageState extends State<UserRestauarantPage>
                             child: Text(
                               widget.data['restaurant'],
                               style: const TextStyle(
-                                  fontFamily: 'ubuntu-bold', fontSize: 20),
+                                fontWeight: FontWeight.bold,
+                                fontSize: 20,
+                              ),
                             ),
                           ),
                           const Spacer(),
                           TextButton(
-                              onPressed: () {
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => ReviewInfoPage(
-                                            resData: widget.data)));
-                              },
-                              child: const Text(
-                                'Reviews & Info',
-                              )),
+                            onPressed: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => ReviewInfoPage(
+                                    resData: widget.data,
+                                  ),
+                                ),
+                              );
+                            },
+                            child: const Text(
+                              'Đánh giá & Thông tin',
+                            ),
+                          ),
                         ],
                       ),
                     ),
@@ -196,11 +196,12 @@ class _UserRestauarantPageState extends State<UserRestauarantPage>
 }
 
 class ResTabs extends StatefulWidget {
-  const ResTabs(
-      {super.key,
-      required this.tabController,
-      required this.tabs,
-      required this.isLoading});
+  const ResTabs({
+    super.key,
+    required this.tabController,
+    required this.tabs,
+    required this.isLoading,
+  });
   final TabController? tabController;
   final List<String> tabs;
   final bool isLoading;
@@ -229,16 +230,16 @@ class _ResTabsState extends State<ResTabs> {
             child: TabBar(
               isScrollable: true,
               controller: widget.tabController,
-              labelColor: appGreen,
+              labelColor: colorPrimary,
               labelStyle: const TextStyle(
                 fontFamily: 'ubuntu-bold',
                 fontSize: 15,
               ),
               unselectedLabelColor: Colors.grey,
-              indicatorColor: appGreen,
+              indicatorColor: colorPrimary,
               indicator: UnderlineTabIndicator(
                 borderSide: BorderSide(
-                  color: appGreen,
+                  color: colorPrimary,
                   width: 3.0,
                 ),
                 insets: const EdgeInsets.symmetric(horizontal: 16.0),

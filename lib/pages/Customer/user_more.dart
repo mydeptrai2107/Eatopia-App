@@ -38,7 +38,7 @@ class PopupDialog extends StatelessWidget {
                   borderRadius: BorderRadius.circular(10.0)),
               foregroundColor: const Color.fromARGB(255, 255, 255, 255),
               // change background color of button
-              backgroundColor: appGreen, // change text color of button
+              backgroundColor: colorPrimary, // change text color of button
             ),
             child: const Text('Đăng ký'),
           ),
@@ -52,7 +52,7 @@ class PopupDialog extends StatelessWidget {
                   borderRadius: BorderRadius.circular(10.0)),
               foregroundColor: const Color.fromARGB(255, 255, 255, 255),
               // change background color of button
-              backgroundColor: appGreen, // change text color of button
+              backgroundColor: colorPrimary, // change text color of button
             ),
             child: const Text('Đăng nhập'),
           ),
@@ -91,9 +91,12 @@ class _UserMoreState extends State<UserMore> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: Padding(
-      padding: const EdgeInsets.all(10.0),
-      child: ListView.builder(
+      appBar: AppBar(
+        title: Text("Hồ sơ"),
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(10.0),
+        child: ListView.builder(
           itemCount: value.length,
           itemBuilder: (context, index) {
             return Card(
@@ -102,7 +105,7 @@ class _UserMoreState extends State<UserMore> {
                   value[index],
                   style: const TextStyle(fontSize: 15),
                 ),
-                tileColor: appGreen,
+                tileColor: colorPrimary,
                 textColor: Colors.white,
                 dense: true,
                 contentPadding: const EdgeInsets.symmetric(
@@ -149,7 +152,7 @@ class _UserMoreState extends State<UserMore> {
                           AuthServices().auth.currentUser!.uid, locTxt);
                       ScaffoldMessenger.of(context).showSnackBar(
                         SnackBar(
-                          backgroundColor: appGreen,
+                          backgroundColor: colorPrimary,
                           content: const Text('Address Updated!'),
                           duration: const Duration(seconds: 2),
                         ),
@@ -159,7 +162,9 @@ class _UserMoreState extends State<UserMore> {
                 },
               ),
             );
-          }),
-    ));
+          },
+        ),
+      ),
+    );
   }
 }

@@ -1,15 +1,14 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:eatopia/pages/Customer/res_dine.dart';
+import 'package:eatopia/pages/Customer/search_page.dart';
 import 'package:eatopia/pages/Customer/user_res_page.dart';
-import 'package:eatopia/services/auth_services.dart';
+import 'package:eatopia/pages/Customer/widgets/grid_product.dart';
+import 'package:eatopia/pages/Customer/widgets/restaurant_horizontal.dart';
+import 'package:eatopia/pages/Restaurant/items.dart';
+import 'package:eatopia/services/db.dart';
 import 'package:eatopia/utilities/custom_shimmer.dart';
 import 'package:flutter/material.dart';
 import 'package:eatopia/utilities/colours.dart';
 import 'package:eatopia/utilities/custom_tiles.dart';
-import 'package:eatopia/pages/Restaurant/all_res.dart';
-
-import 'search_page.dart';
-import 'user_order_page.dart';
 
 class UserMainHome extends StatefulWidget {
   const UserMainHome({super.key});
@@ -20,213 +19,91 @@ class UserMainHome extends StatefulWidget {
 
 class _UserMainHomeState extends State<UserMainHome>
     with AutomaticKeepAliveClientMixin {
+  List<Item> prodItems = [];
+
+  void getCtgItems() async {
+    prodItems = await Db().getProductItems();
+    setState(() {});
+  }
+
+  @override
+  void initState() {
+    getCtgItems();
+    super.initState();
+  }
+
   @override
   bool get wantKeepAlive => true;
   @override
   Widget build(BuildContext context) {
     super.build(context);
-    final scrSize = MediaQuery.of(context).size;
-    return Column(
-      children: [
-        Container(
-          width: MediaQuery.of(context).size.width,
-          height: MediaQuery.of(context).size.height * 0.1,
-          decoration: BoxDecoration(
-            color: appGreen,
-            boxShadow: [
-              BoxShadow(
-                  color: Colors.grey.withAlpha(50),
-                  spreadRadius: 5,
-                  blurRadius: 7,
-                  offset: const Offset(0, 3)),
-            ],
-            borderRadius: const BorderRadius.only(
-              bottomLeft: Radius.circular(10),
-              bottomRight: Radius.circular(10),
-            ),
-          ),
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 15.0),
-            child: TextField(
-              readOnly: true,
-              onTap: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context) {
-                  return const SearchPage();
-                }));
-              },
-              cursorColor: Colors.black,
-              decoration: const InputDecoration(
-                filled: true,
-                fillColor: Colors.white,
-                hintText: 'Tìm kiếm',
-                prefixIcon: Icon(Icons.search),
-                prefixIconColor: Colors.black,
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.all(
-                    Radius.circular(30),
-                  ),
+    return SafeArea(
+      child: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16),
+              child: Text(
+                'Delicious\nfood for you',
+                style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.w900,
+                  color: colorPrimary,
                 ),
               ),
             ),
-          ),
-        ),
-        const SizedBox(height: 30),
-        Expanded(
-          child: ListView(
-            children: [
-              //List Tile showing View Your Orders Button
-              SizedBox(
-                height: 70,
-                child: Card(
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10),
+            SizedBox(height: 20),
+            RichText(
+              text: TextSpan(
+                  text: '     Hey you, ',
+                  style: TextStyle(
+                    color: Colors.black,
                   ),
-                  elevation: 5,
-                  child: ListTile(
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    onTap: () {
-                      if (AuthServices().auth.currentUser != null) {
-                        Navigator.push(context,
-                            MaterialPageRoute(builder: (context) {
-                          return const UserOrder();
-                        }));
-                      }
-                      //SHow a Pop up Saying sign-in to continue
-                      else {
-                        showDialog(
-                          context: context,
-                          builder: (context) {
-                            return AlertDialog(
-                              title: const Text('Đăng nhập để tiếp tục'),
-                              content: const Text(
-                                'Bạn cần đăng nhập để xem đơn hàng của mình',
-                              ),
-                              actions: [
-                                TextButton(
-                                  onPressed: () {
-                                    Navigator.pop(context);
-                                  },
-                                  child: const Text('OK'),
-                                )
-                              ],
-                            );
-                          },
-                        );
-                      }
-                    },
-                    title: const Text(
-                      'Xem đơn hàng của bạn',
-                      style: TextStyle(
-                        fontFamily: 'ubuntu-bold',
-                        fontSize: 20,
-                      ),
-                    ),
-                    trailing: const Icon(
-                      Icons.arrow_forward_ios,
-                      size: 20,
-                    ),
-                  ),
-                ),
-              ),
-              const SizedBox(height: 20),
-
-              //Container for Displaying tiles
-              Container(
-                constraints: const BoxConstraints(minHeight: 200),
-                padding: const EdgeInsets.all(10),
-                color: Colors.grey[200],
-                height: scrSize.height * 0.3,
-                width: scrSize.width,
-                child: Center(
-                  //Displaying Tiles inside it.
-                  child: Column(
-                    children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          CustomTile(
-                              size: Size(
-                                  scrSize.width * 0.4, scrSize.height * 0.23),
-                              heading: 'Giao đồ ăn',
-                              description:
-                                  'Đặt món ăn từ nhà hàng yêu thích của bạn',
-                              icon: const Icon(
-                                Icons.delivery_dining_rounded,
-                                size: 30,
-                              )),
-                          GestureDetector(
-                            onTap: () {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => const ResDine()));
-                            },
-                            child: CustomTile(
-                              size: Size(
-                                  scrSize.width * 0.4, scrSize.height * 0.23),
-                              heading: 'Dùng bữa tại nhà hàng',
-                              description: 'Hãy đặt chỗ và ăn tại đây!',
-                              icon: const Icon(
-                                Icons.restaurant,
-                                size: 30,
-                              ),
-                            ),
-                          ),
-                        ],
-                      )
-                    ],
-                  ),
-                ),
-              ),
-              Container(
-                color: Colors.white,
-                width: scrSize.width,
-                height: scrSize.height * 0.4,
-                padding: const EdgeInsets.all(10),
-                child: Column(
                   children: [
-                    Align(
-                      alignment: Alignment.centerLeft,
-                      child: Row(
-                        children: [
-                          const Text(
-                            'Nhà hàng',
-                            style: TextStyle(
-                              fontFamily: 'Ubuntu-bold',
-                              fontWeight: FontWeight.bold,
-                              fontSize: 20,
-                            ),
-                          ),
-                          const Spacer(),
-                          TextButton(
-                              onPressed: () {
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => const AllRes()));
-                              },
-                              child: Text(
-                                'Xem tất cả',
-                                style: TextStyle(
-                                    color: appGreen,
-                                    fontWeight: FontWeight.bold),
-                              )),
-                        ],
+                    TextSpan(
+                      text: ' Good Afternoom!',
+                      style: TextStyle(
+                        fontWeight: FontWeight.w900,
+                        color: Colors.black,
                       ),
-                    ),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    const Expanded(child: RestaurantTiles()),
+                    )
+                  ]),
+            ),
+            InkWell(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => SearchPage(),
+                  ),
+                );
+              },
+              child: Container(
+                margin: EdgeInsets.all(16),
+                padding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                decoration: BoxDecoration(
+                  color: Colors.grey[100],
+                  borderRadius: BorderRadius.circular(100),
+                ),
+                child: Row(
+                  children: [
+                    Icon(Icons.search),
+                    Text(
+                      'Search',
+                      style: TextStyle(
+                        color: Colors.grey,
+                      ),
+                    )
                   ],
                 ),
               ),
-            ],
-          ),
-        )
-      ],
+            ),
+            RestaurantHorizontal(),
+            GridProduct(prodItems),
+          ],
+        ),
+      ),
     );
   }
 }
@@ -241,11 +118,9 @@ class RestaurantTiles extends StatefulWidget {
 class _RestaurantTilesState extends State<RestaurantTiles> {
   @override
   Widget build(BuildContext context) {
-    // Create a reference to the collection
     CollectionReference collectionRef =
         FirebaseFirestore.instance.collection('Restaurants');
 
-// Build a stream of QuerySnapshot containing all the documents in the collection
     Stream<QuerySnapshot> stream = collectionRef.snapshots();
     return StreamBuilder(
         stream: stream,
@@ -273,17 +148,21 @@ class _RestaurantTilesState extends State<RestaurantTiles> {
                   child: GestureDetector(
                     onTap: () {
                       Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => UserRestauarantPage(data: {
-                                    'id': doc.id,
-                                    'restaurant': doc['restaurant'],
-                                    'image': imageURL,
-                                    'description': resDesc,
-                                    'address': address,
-                                    'email': doc['email'],
-                                    'phone': doc['phone'],
-                                  })));
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => UserRestauarantPage(
+                            data: {
+                              'id': doc.id,
+                              'restaurant': doc['restaurant'],
+                              'image': imageURL,
+                              'description': resDesc,
+                              'address': address,
+                              'email': doc['email'],
+                              'phone': doc['phone'],
+                            },
+                          ),
+                        ),
+                      );
                     },
                     child: ImageTile(
                       heading: doc['restaurant'],

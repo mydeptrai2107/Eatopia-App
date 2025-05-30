@@ -34,7 +34,7 @@ class WelcomePage extends StatelessWidget {
                       borderRadius: BorderRadius.circular(10.0)),
                   foregroundColor: const Color.fromARGB(255, 255, 255, 255),
                   // change background color of button
-                  backgroundColor: appGreen, // change text color of button
+                  backgroundColor: colorPrimary, // change text color of button
                 ),
                 child: const Text("Đăng nhập với Email"),
               ),
@@ -51,7 +51,7 @@ class WelcomePage extends StatelessWidget {
                       borderRadius: BorderRadius.circular(10.0)),
                   foregroundColor: const Color.fromARGB(255, 255, 255, 255),
                   // change background color of button
-                  backgroundColor: appGreen, // change text color of button
+                  backgroundColor: colorPrimary, // change text color of button
                 ),
                 child: const Text("Đăng ký với Email"),
               ),
@@ -69,7 +69,7 @@ class WelcomePage extends StatelessWidget {
                       borderRadius: BorderRadius.circular(10.0)),
                   foregroundColor: Colors.white,
                   // change background color of button
-                  backgroundColor: appGreen, // change text color of button
+                  backgroundColor: colorPrimary, // change text color of button
                 ),
                 child: const Text("Tiếp tục với khách"),
               ),

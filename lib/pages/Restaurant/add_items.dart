@@ -95,7 +95,7 @@ class _AddItemPageState extends State<AddItemPage> {
                         },
                         emailController: itemNameController,
                         boxH: 100,
-                        primaryColor: appGreen),
+                        primaryColor: colorPrimary),
                     const SizedBox(height: 20),
                     const Align(
                       alignment: Alignment.centerLeft,
@@ -113,17 +113,17 @@ class _AddItemPageState extends State<AddItemPage> {
                       maxLength: 80,
                       decoration: InputDecoration(
                         border: OutlineInputBorder(
-                          borderSide: BorderSide(color: appGreen),
+                          borderSide: BorderSide(color: colorPrimary),
                           borderRadius:
                               const BorderRadius.all(Radius.circular(10)),
                         ),
                         enabledBorder: OutlineInputBorder(
-                          borderSide: BorderSide(color: appGreen),
+                          borderSide: BorderSide(color: colorPrimary),
                           borderRadius:
                               const BorderRadius.all(Radius.circular(10)),
                         ),
                         focusedBorder: OutlineInputBorder(
-                          borderSide: BorderSide(color: appGreen),
+                          borderSide: BorderSide(color: colorPrimary),
                           borderRadius:
                               const BorderRadius.all(Radius.circular(10)),
                         ),
@@ -143,7 +143,7 @@ class _AddItemPageState extends State<AddItemPage> {
                       inputType: TextInputType.number,
                       emailController: priceController,
                       boxH: 100,
-                      primaryColor: appGreen,
+                      primaryColor: colorPrimary,
                       hintText: '',
                       labelText: '',
                       validator: priceValidator,
@@ -268,7 +268,7 @@ class _AddItemPageState extends State<AddItemPage> {
                       child: ElevatedButton(
                         style: ButtonStyle(
                           backgroundColor:
-                              WidgetStateProperty.all<Color>(appGreen),
+                              WidgetStateProperty.all<Color>(colorPrimary),
                           fixedSize: WidgetStateProperty.all<Size>(Size(
                               MediaQuery.of(context).size.width / 3,
                               MediaQuery.of(context).size.height / 18)),

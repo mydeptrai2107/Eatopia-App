@@ -93,35 +93,35 @@ class _ResItemsPageState extends State<ResItemsPage>
                           ),
                           const SizedBox(height: 10),
                           ElevatedButton(
-                              style: ElevatedButton.styleFrom(
-                                backgroundColor: Colors.white,
-                                fixedSize:
-                                    Size(MediaQuery.of(context).size.width, 50),
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(10),
-                                ),
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: Colors.white,
+                              fixedSize:
+                                  Size(MediaQuery.of(context).size.width, 50),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(10),
                               ),
-                              onPressed: () async {
-                                Item? newItem = await Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => AddItemPage(
-                                              categories:
-                                                  ctgItems.keys.toList(),
-                                            )));
-                                if (newItem != null) {
-                                  setState(() {
-                                    ctgItems[newItem.category]!.add(newItem);
-                                  });
-                                }
-                              },
-                              child: const Text(
-                                'Thêm món mới',
-                                style: TextStyle(
-                                    fontFamily: 'ubuntu-bold',
-                                    color: Colors.black,
-                                    fontSize: 16),
-                              )),
+                            ),
+                            onPressed: () async {
+                              Item? newItem = await Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => AddItemPage(
+                                            categories: ctgItems.keys.toList(),
+                                          )));
+                              if (newItem != null) {
+                                setState(() {
+                                  ctgItems[newItem.category]!.add(newItem);
+                                });
+                              }
+                            },
+                            child: const Text(
+                              'Thêm món mới',
+                              style: TextStyle(
+                                  fontFamily: 'ubuntu-bold',
+                                  color: Colors.black,
+                                  fontSize: 16),
+                            ),
+                          ),
                         ],
                       ),
                     );

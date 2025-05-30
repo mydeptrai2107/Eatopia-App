@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:eatopia/utilities/cache_manger.dart';
+import 'package:eatopia/utilities/colours.dart';
 import 'package:flutter/material.dart';
 import 'package:shimmer_animation/shimmer_animation.dart';
 
@@ -67,11 +68,12 @@ class CustomTile extends StatelessWidget {
 }
 
 class ImageTile extends StatelessWidget {
-  const ImageTile(
-      {super.key,
-      required this.heading,
-      required this.description,
-      required this.image});
+  const ImageTile({
+    super.key,
+    required this.heading,
+    required this.description,
+    required this.image,
+  });
 
   final String heading;
   final String description;
@@ -84,7 +86,6 @@ class ImageTile extends StatelessWidget {
       margin: const EdgeInsets.fromLTRB(5, 0, 5, 0),
       decoration: BoxDecoration(
         border: Border.all(color: Colors.transparent),
-        color: Colors.white,
         borderRadius: BorderRadius.circular(10),
       ),
       child: Column(
@@ -125,24 +126,56 @@ class ImageTile extends StatelessWidget {
             child: Text(
               heading,
               style: const TextStyle(
-                  fontFamily: 'Ubuntu-bold',
-                  fontWeight: FontWeight.bold,
-                  fontSize: 20),
+                fontWeight: FontWeight.bold,
+                fontSize: 14,
+              ),
             ),
-          ),
-          const SizedBox(
-            height: 10,
           ),
           Align(
             alignment: Alignment.centerLeft,
             child: Text(
               description,
               style: const TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 12,
-                  overflow: TextOverflow.ellipsis),
+                color: Colors.grey,
+                fontSize: 12,
+                fontWeight: FontWeight.bold,
+                overflow: TextOverflow.ellipsis,
+              ),
             ),
           ),
+          Row(
+            children: [
+              Icon(
+                Icons.delivery_dining_sharp,
+                color: colorPrimary,
+                size: 16,
+              ),
+              Text(
+                ' Miễn phí',
+                style: TextStyle(
+                  color: colorPrimary,
+                  fontSize: 10,
+                  fontWeight: FontWeight.bold,
+                  overflow: TextOverflow.ellipsis,
+                ),
+              ),
+              SizedBox(width: 16),
+              Icon(
+                Icons.access_time,
+                color: colorPrimary,
+                size: 16,
+              ),
+              Text(
+                ' 20 phút',
+                style: TextStyle(
+                  color: colorPrimary,
+                  fontSize: 10,
+                  fontWeight: FontWeight.bold,
+                  overflow: TextOverflow.ellipsis,
+                ),
+              ),
+            ],
+          )
         ],
       ),
     );

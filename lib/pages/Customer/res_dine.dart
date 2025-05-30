@@ -19,7 +19,7 @@ class _ResDineState extends State<ResDine> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Restaurants For Dining'),
-        backgroundColor: appGreen,
+        backgroundColor: colorPrimary,
       ),
       body: StreamBuilder(
         stream:

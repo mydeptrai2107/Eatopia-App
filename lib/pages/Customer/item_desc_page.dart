@@ -5,6 +5,7 @@ import 'package:eatopia/services/db.dart';
 import 'package:eatopia/utilities/cache_manger.dart';
 import 'package:eatopia/utilities/colours.dart';
 import 'package:eatopia/utilities/custom_shimmer.dart';
+import 'package:eatopia/utilities/formatter.dart';
 import 'package:flutter/material.dart';
 
 class ItemDescPage extends StatefulWidget {
@@ -49,14 +50,15 @@ class _ItemDescPageState extends State<ItemDescPage> {
             left: 5,
             child: SafeArea(
               child: FloatingActionButton.small(
-                  backgroundColor: Colors.white,
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
-                  child: Icon(
-                    Icons.arrow_back,
-                    color: appGreen,
-                  )),
+                backgroundColor: Colors.white,
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                child: Icon(
+                  Icons.arrow_back,
+                  color: colorPrimary,
+                ),
+              ),
             ),
           ),
         ]),
@@ -73,7 +75,7 @@ class _ItemDescPageState extends State<ItemDescPage> {
               height: 10,
             ),
             Text(
-              'Rs ${widget.item.price}',
+              Formatter.formatCurrency(widget.item.price),
               style: const TextStyle(fontSize: 18, fontFamily: 'ubuntu-bold'),
             ),
             const SizedBox(
@@ -89,14 +91,14 @@ class _ItemDescPageState extends State<ItemDescPage> {
                 ? AddOnWidget(addOns: widget.item.addOns)
                 : const SizedBox(),
             const Text(
-              'Special Instructions',
+              'Ghi chú của bạn',
               style: TextStyle(fontSize: 18, fontFamily: 'ubuntu-bold'),
             ),
             const SizedBox(
               height: 10,
             ),
             const Text(
-                'Any additional Information you want to provide about your order you can write here (Optional)'),
+                'Bất kỳ thông tin bổ sung nào bạn muốn cung cấp về đơn hàng của mình, bạn có thể viết ở đây (Tùy chọn)'),
             const SizedBox(
               height: 20,
             ),
@@ -106,10 +108,11 @@ class _ItemDescPageState extends State<ItemDescPage> {
               maxLines: 3,
               onTapOutside: (event) => FocusScope.of(context).unfocus(),
               decoration: InputDecoration(
-                  label: const Text('Special Instructions'),
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10),
-                  )),
+                label: const Text('Ghi chú'),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(10),
+                ),
+              ),
             )
           ],
         ),
@@ -129,7 +132,7 @@ class _ItemDescPageState extends State<ItemDescPage> {
                 width: 40,
                 height: 40,
                 decoration: BoxDecoration(
-                  color: itemCount != 1 ? appGreen : Colors.grey,
+                  color: itemCount != 1 ? colorPrimary : Colors.grey,
                   shape: BoxShape.circle,
                 ),
                 child: const Icon(
@@ -159,7 +162,7 @@ class _ItemDescPageState extends State<ItemDescPage> {
                 width: 40,
                 height: 40,
                 decoration: BoxDecoration(
-                  color: appGreen,
+                  color: colorPrimary,
                   shape: BoxShape.circle,
                 ),
                 child: const Icon(
@@ -183,15 +186,17 @@ class _ItemDescPageState extends State<ItemDescPage> {
                           return AlertDialog(
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(10)),
-                            title: const Text('Item Added to Cart'),
+                            title: const Text('Thành công'),
                             content: const Text(
-                                'Your item has been added to the cart'),
+                              'Sản phẩm đã được thêm vào giỏ hàng',
+                            ),
                             actions: [
                               TextButton(
-                                  onPressed: () {
-                                    Navigator.pop(context);
-                                  },
-                                  child: const Text('OK'))
+                                onPressed: () {
+                                  Navigator.pop(context);
+                                },
+                                child: const Text('OK'),
+                              )
                             ],
                           );
                         });
@@ -199,6 +204,8 @@ class _ItemDescPageState extends State<ItemDescPage> {
                         AuthServices().auth.currentUser!.uid,
                         {
                           'name': widget.item.name,
+                          'imageURL': widget.item.imageURL,
+                          'category': widget.item.category,
                           'basePrice': widget.item.price,
                           'quantity': itemCount,
                           'spcInstr': spInstrCOntroller.text,
@@ -215,25 +222,27 @@ class _ItemDescPageState extends State<ItemDescPage> {
                           return AlertDialog(
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(10)),
-                            title:
-                                const Text('PLease Login to Add Items to cart'),
+                            title: const Text('Vui lòng đăng nhập'),
                             actions: [
                               TextButton(
-                                  onPressed: () {
-                                    Navigator.pop(context);
-                                  },
-                                  child: const Text('OK'))
+                                onPressed: () {
+                                  Navigator.pop(context);
+                                },
+                                child: const Text('OK'),
+                              )
                             ],
                           );
                         });
                   }
                 },
                 style: ElevatedButton.styleFrom(
-                    minimumSize: const Size(50, 50),
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10))),
+                  minimumSize: const Size(50, 50),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                ),
                 child: const Text(
-                  'Add to Cart',
+                  'Thêm vào giỏ hàng',
                   style: TextStyle(fontSize: 15, fontFamily: 'ubuntu-bold'),
                 ),
               ),
@@ -261,38 +270,41 @@ class _AddOnWidgetState extends State<AddOnWidget> {
   Widget build(BuildContext context) {
     checked = List.filled(widget.addOns.length, false);
     addOnsName = widget.addOns.keys.toList();
+
     return Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-              const Text(
-                'Add-ons (Optional)',
-                style: TextStyle(fontSize: 18, fontFamily: 'ubuntu-bold'),
-              ),
-            ] +
-            widget.addOns.entries.map((e) {
-              return Row(
-                children: [
-                  StatefulBuilder(builder: (context, setState) {
-                    return Checkbox(
-                        value: checked[addOnsName.indexOf(e.key)],
-                        onChanged: (value) {
-                          setState(() {
-                            checked[addOnsName.indexOf(e.key)] = value!;
-                          });
-                        });
-                  }),
-                  Text(
-                    e.key,
-                    style: const TextStyle(fontSize: 15),
-                  ),
-                  const Spacer(),
-                  Text(
-                    '+ Rs ${e.value}',
-                    style: const TextStyle(fontSize: 15),
-                  ),
-                ],
-              );
-            }).toList() +
-            [const SizedBox(height: 20)]);
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: <Widget>[
+            const Text(
+              'Thêm lựa chọn',
+              style: TextStyle(fontSize: 18, fontFamily: 'ubuntu-bold'),
+            ),
+          ] +
+          widget.addOns.entries.map((e) {
+            return Row(
+              children: [
+                StatefulBuilder(builder: (context, setState) {
+                  return Checkbox(
+                    value: checked[addOnsName.indexOf(e.key)],
+                    onChanged: (value) {
+                      setState(() {
+                        checked[addOnsName.indexOf(e.key)] = value!;
+                      });
+                    },
+                  );
+                }),
+                Text(
+                  e.key,
+                  style: const TextStyle(fontSize: 15),
+                ),
+                const Spacer(),
+                Text(
+                  '+ Rs ${e.value}',
+                  style: const TextStyle(fontSize: 15),
+                ),
+              ],
+            );
+          }).toList() +
+          [const SizedBox(height: 20)],
+    );
   }
 }

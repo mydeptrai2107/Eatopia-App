@@ -23,6 +23,8 @@ class Order {
       Map<String, dynamic> oI = {
         'restId': element.restId,
         'itemId': element.itemId,
+        'imageURL': element.imageURL,
+        'category': element.category,
         'title': element.title,
         'spcInstr': element.spcInstr,
         'quantity': element.quantity,

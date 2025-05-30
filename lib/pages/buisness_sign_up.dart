@@ -18,7 +18,7 @@ class BuisnessSignup extends StatefulWidget {
 class _BuisnessSignupState extends State<BuisnessSignup> {
   //This _formKey will help us validate the inputs (check whether the user has entered the correct input or not)
   final _formKey = GlobalKey<FormState>();
-  final Color _primaryColor = appGreen;
+  final Color _primaryColor = colorPrimary;
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
   final ownerController = TextEditingController();
@@ -246,8 +246,8 @@ class _BuisnessSignupState extends State<BuisnessSignup> {
                     },
                     child: Text(
                       'Chọn vị trí từ bản đồ',
-                      style:
-                          TextStyle(color: appGreen, fontFamily: 'ubuntu-bold'),
+                      style: TextStyle(
+                          color: colorPrimary, fontFamily: 'ubuntu-bold'),
                     )),
                 const SizedBox(height: 20),
                 SizedBox(

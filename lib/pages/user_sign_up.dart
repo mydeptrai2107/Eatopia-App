@@ -19,7 +19,7 @@ class UserSignUpPageOne extends StatefulWidget {
 class _UserSignUpPageOneState extends State<UserSignUpPageOne> {
   //This _formKey will help us validate the inputs (check whether the user has entered the correct input or not)
   final _formKey = GlobalKey<FormState>();
-  final Color _primaryColor = appGreen;
+  final Color _primaryColor = colorPrimary;
   final emailController = TextEditingController();
   bool isLoading = false;
   @override
@@ -188,7 +188,7 @@ class UserSignUpPageTwo extends StatefulWidget {
 class _UserSignUpPageTwoState extends State<UserSignUpPageTwo> {
   Map userData = {};
   final _formKey = GlobalKey<FormState>();
-  final Color _primaryColor = appGreen;
+  final Color _primaryColor = colorPrimary;
   final userNameController = TextEditingController();
   final phoneController = TextEditingController();
   final addressController = TextEditingController();
@@ -376,7 +376,7 @@ class _UserSignUpPageTwoState extends State<UserSignUpPageTwo> {
                     child: Text(
                       'Chọn vị trí từ bản đồ',
                       style: TextStyle(
-                        color: appGreen,
+                        color: colorPrimary,
                         fontFamily: 'ubuntu-bold',
                       ),
                     )),

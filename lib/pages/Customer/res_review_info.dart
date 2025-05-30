@@ -21,7 +21,8 @@ class _ReviewInfoPageState extends State<ReviewInfoPage> {
         preferredSize: const Size.fromHeight(150.0),
         child: Stack(children: [
           CachedNetworkImage(
-            imageUrl: widget.resData['image'] ?? 'https://i.pinimg.com/736x/49/e5/8d/49e58d5922019b8ec4642a2e2b9291c2.jpg',
+            imageUrl: widget.resData['image'] ??
+                'https://i.pinimg.com/736x/49/e5/8d/49e58d5922019b8ec4642a2e2b9291c2.jpg',
             cacheManager: appCacheManager,
             imageBuilder: (context, imageProvider) => Container(
               decoration: BoxDecoration(
@@ -49,7 +50,7 @@ class _ReviewInfoPageState extends State<ReviewInfoPage> {
                   },
                   child: Icon(
                     Icons.arrow_back,
-                    color: appGreen,
+                    color: colorPrimary,
                   )),
             ),
           ),

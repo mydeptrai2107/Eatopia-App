@@ -116,7 +116,7 @@ class _UserProfileState extends State<UserProfile> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('More'),
+        title: const Text('Thông tin'),
       ),
       body: Column(
         children: [
@@ -181,7 +181,7 @@ class _UserProfileState extends State<UserProfile> {
                               _editUserData();
                             },
                             style: ElevatedButton.styleFrom(
-                              backgroundColor: appGreen,
+                              backgroundColor: colorPrimary,
                               foregroundColor: Colors.white,
                             ),
                             child: const Text('Chỉnh sửa'),

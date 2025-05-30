@@ -3,6 +3,7 @@ import 'package:eatopia/services/auth_services.dart';
 import 'package:eatopia/services/db.dart';
 import 'package:eatopia/services/maps.dart';
 import 'package:eatopia/utilities/colours.dart';
+import 'package:eatopia/utilities/formatter.dart';
 import 'package:eatopia/utilities/order.dart';
 import 'package:eatopia/utilities/order_item.dart';
 import 'package:flutter/material.dart';
@@ -26,30 +27,26 @@ class _CheckoutPageState extends State<CheckoutPage> {
       ),
       body: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.all(8),
+          padding: const EdgeInsets.all(16),
           child: Column(
             children: [
               //Information SHowing
               Container(
-                padding: const EdgeInsets.all(10),
+                padding: const EdgeInsets.all(12),
                 width: MediaQuery.of(context).size.width,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10),
                   color: Colors.white,
-                  boxShadow: [
-                    BoxShadow(
-                        color: Colors.grey.withAlpha(50),
-                        spreadRadius: 5,
-                        blurRadius: 7,
-                        offset: const Offset(0, 3)),
-                  ],
                 ),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     const Text(
-                      'Xem lại thông tin của bạn',
-                      style: TextStyle(fontFamily: 'ubuntu-bold', fontSize: 20),
+                      'Thông tin của bạn',
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.w700,
+                      ),
                     ),
                     const SizedBox(height: 10),
                     Row(
@@ -58,12 +55,11 @@ class _CheckoutPageState extends State<CheckoutPage> {
                         const SizedBox(width: 10),
                         const Text(
                           'Địa chỉ',
-                          style: TextStyle(
-                              fontFamily: 'ubuntu-bold', fontSize: 20),
+                          style: TextStyle(fontSize: 16),
                         ),
                         const Spacer(),
-                        IconButton(
-                          onPressed: () async {
+                        InkWell(
+                          onTap: () async {
                             String? add = await Navigator.push(context,
                                 MaterialPageRoute(builder: (context) {
                               return const MapScreen();
@@ -74,14 +70,19 @@ class _CheckoutPageState extends State<CheckoutPage> {
                               });
                             }
                           },
-                          icon: const Icon(Icons.edit),
+                          child: Text(
+                            'Chỉnh sửa',
+                            style: TextStyle(
+                              fontSize: 16,
+                              color: colorPrimary,
+                            ),
+                          ),
                         ),
                       ],
                     ),
                     Text(
                       widget.userData['stAddress'],
                       style: const TextStyle(
-                        fontFamily: 'ubuntu',
                         fontSize: 15,
                       ),
                     ),
@@ -93,8 +94,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
                         SizedBox(width: 10),
                         Text(
                           'Số điện thoại',
-                          style: TextStyle(
-                              fontFamily: 'ubuntu-bold', fontSize: 20),
+                          style: TextStyle(fontSize: 16),
                         ),
                       ],
                     ),
@@ -118,14 +118,6 @@ class _CheckoutPageState extends State<CheckoutPage> {
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10),
                   color: Colors.white,
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.grey.withAlpha(50),
-                      spreadRadius: 5,
-                      blurRadius: 7,
-                      offset: const Offset(0, 3),
-                    ),
-                  ],
                 ),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -133,8 +125,8 @@ class _CheckoutPageState extends State<CheckoutPage> {
                     const Text(
                       'Tóm tắt đơn hàng',
                       style: TextStyle(
-                        fontFamily: 'ubuntu-bold',
                         fontSize: 20,
+                        fontWeight: FontWeight.w700,
                       ),
                     ),
                     const SizedBox(height: 10),
@@ -144,15 +136,20 @@ class _CheckoutPageState extends State<CheckoutPage> {
                       itemCount: CartList.list.length,
                       itemBuilder: (context, index) {
                         return ListTile(
+                          leading: Image.network(
+                            CartList.list[index].imageURL,
+                            width: 40,
+                            height: 40,
+                          ),
                           title: Text(
                             CartList.list[index].title,
                             style: const TextStyle(
                                 fontFamily: 'ubuntu', fontSize: 15),
                           ),
                           subtitle: Text(
-                            'Rs. ${CartList.list[index].totalPrice}',
-                            style: const TextStyle(
-                                fontFamily: 'ubuntu', fontSize: 15),
+                            Formatter.formatCurrency(
+                                CartList.list[index].totalPrice),
+                            style: const TextStyle(fontSize: 15),
                           ),
                           trailing: Text(
                             'x${CartList.list[index].quantity}',
@@ -169,15 +166,20 @@ class _CheckoutPageState extends State<CheckoutPage> {
                         const Text(
                           'Tổng cộng',
                           style: TextStyle(
-                            fontFamily: 'ubuntu-bold',
-                            fontSize: 20,
+                            fontSize: 18,
+                            fontWeight: FontWeight.w700,
                           ),
                         ),
                         const Spacer(),
                         Text(
-                          'Rs. ${CartList.list.fold(0.0, (p, c) => p + c.totalPrice)}',
-                          style: const TextStyle(
-                              fontFamily: 'ubuntu-bold', fontSize: 20),
+                          Formatter.formatCurrency(
+                            CartList.list.fold(0.0, (p, c) => p + c.totalPrice),
+                          ),
+                          style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.w700,
+                            color: colorPrimary,
+                          ),
                         ),
                       ],
                     ),
@@ -192,14 +194,6 @@ class _CheckoutPageState extends State<CheckoutPage> {
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10),
                   color: Colors.white,
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.grey.withAlpha(50),
-                      spreadRadius: 5,
-                      blurRadius: 7,
-                      offset: const Offset(0, 3),
-                    ),
-                  ],
                 ),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -207,8 +201,8 @@ class _CheckoutPageState extends State<CheckoutPage> {
                     const Text(
                       'Phương thức thanh toán',
                       style: TextStyle(
-                        fontFamily: 'ubuntu-bold',
-                        fontSize: 18,
+                        fontSize: 20,
+                        fontWeight: FontWeight.w700,
                       ),
                     ),
                     const SizedBox(height: 10),
@@ -218,12 +212,26 @@ class _CheckoutPageState extends State<CheckoutPage> {
                       title: const Text(
                         'Tiền mặt khi giao hàng',
                         style: TextStyle(
-                          color: Colors.black,
-                          fontFamily: 'ubuntu-bold',
                           fontSize: 16,
                         ),
                       ),
                       groupValue: 'COD',
+                      onChanged: (value) {
+                        setState(() {
+                          widget.userData['paymentMethod'] = value;
+                        });
+                      },
+                    ),
+                    RadioListTile(
+                      selected: true,
+                      value: 'COD',
+                      title: const Text(
+                        'Zalo Pay',
+                        style: TextStyle(
+                          fontSize: 16,
+                        ),
+                      ),
+                      groupValue: 'Zalo',
                       onChanged: (value) {
                         setState(() {
                           widget.userData['paymentMethod'] = value;
@@ -237,16 +245,14 @@ class _CheckoutPageState extends State<CheckoutPage> {
               //Button To Place Order
               ElevatedButton(
                 style: ElevatedButton.styleFrom(
-                  elevation: 5,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  fixedSize: Size(MediaQuery.of(context).size.width * 0.8, 50),
-                  textStyle: const TextStyle(
-                    fontSize: 20,
-                    fontFamily: 'ubuntu-bold',
-                  ),
-                ),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    fixedSize: Size(MediaQuery.of(context).size.width - 30, 50),
+                    textStyle: const TextStyle(
+                      fontSize: 20,
+                    ),
+                    backgroundColor: colorPrimary),
                 onPressed: () async {
                   setState(() {
                     isLoading = true;
@@ -258,6 +264,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
                     custId: AuthServices().auth.currentUser!.uid,
                     restId: CartList.list[0].restId,
                     status: 'pending',
+                    
                   );
                   order.addAllOrderItems(CartList.list);
                   await Db().addOrder(order);
@@ -267,7 +274,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
                   //Show SnackBar
                   ScaffoldMessenger.of(context).showSnackBar(
                     SnackBar(
-                      backgroundColor: appGreen,
+                      backgroundColor: colorPrimary,
                       content: const Text('Đơn hàng đã được đặt thành công'),
                     ),
                   );
@@ -288,7 +295,10 @@ class _CheckoutPageState extends State<CheckoutPage> {
                         color: Colors.white,
                         strokeWidth: 1.2,
                       )
-                    : const Text('Đặt hàng'),
+                    : const Text(
+                        'Đặt hàng',
+                        style: TextStyle(color: Colors.white),
+                      ),
               ),
               const SizedBox(height: 20)
             ],

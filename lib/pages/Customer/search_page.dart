@@ -65,7 +65,7 @@ class _SearchPageState extends State<SearchPage> {
               hintText: 'Tìm kiếm',
               prefixIcon: const Icon(Icons.search),
               prefixIconColor: Colors.black,
-              border: const OutlineInputBorder(
+              border: OutlineInputBorder(
                 borderRadius: BorderRadius.all(
                   Radius.circular(20),
                 ),

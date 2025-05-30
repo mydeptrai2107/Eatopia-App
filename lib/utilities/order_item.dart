@@ -6,6 +6,8 @@ class OrderItem {
   String restId;
   String itemId;
   String id;
+  String imageURL;
+  String category;
   String title;
   String spcInstr;
   int quantity;
@@ -71,7 +73,7 @@ class OrderItem {
                   width: 40,
                   height: 40,
                   decoration: BoxDecoration(
-                    color: quantity != 0 ? appGreen : Colors.grey,
+                    color: quantity != 0 ? colorPrimary : Colors.grey,
                     shape: BoxShape.circle,
                   ),
                   child: const Icon(
@@ -101,7 +103,7 @@ class OrderItem {
                   width: 40,
                   height: 40,
                   decoration: BoxDecoration(
-                    color: appGreen,
+                    color: colorPrimary,
                     shape: BoxShape.circle,
                   ),
                   child: const Icon(
@@ -134,15 +136,18 @@ class OrderItem {
     );
   }
 
-  OrderItem(
-      {required this.itemId,
-      required this.id,
-      required this.title,
-      required this.quantity,
-      required this.basePrice,
-      required this.addOns,
-      required this.spcInstr,
-      required this.restId});
+  OrderItem({
+    required this.itemId,
+    required this.id,
+    required this.imageURL,
+    required this.category,
+    required this.title,
+    required this.quantity,
+    required this.basePrice,
+    required this.addOns,
+    required this.spcInstr,
+    required this.restId,
+  });
 }
 
 class CartList {

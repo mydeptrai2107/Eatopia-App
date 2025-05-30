@@ -56,7 +56,7 @@ class _SearchResultsPageState extends State<SearchResultsPage> {
                         Icon(
                           Icons.search_off_rounded,
                           size: 120,
-                          color: appGreen,
+                          color: colorPrimary,
                         ),
                         const SizedBox(height: 16),
                         const Text(

@@ -63,13 +63,18 @@ class Db {
     });
   }
 
-  Future<void> addOrderItemToCart(String uid, Map<String, dynamic> orderItem,
-      {StateSetter? setState}) async {
+  Future<void> addOrderItemToCart(
+    String uid,
+    Map<String, dynamic> orderItem, {
+    StateSetter? setState,
+  }) async {
     final doc = db.collection('Customers').doc(uid).collection('Cart').doc();
     await doc.set(orderItem);
     CartList.list.add(OrderItem(
       id: doc.id,
       itemId: orderItem['itemId'],
+      imageURL: orderItem['imageURL'],
+      category: orderItem['category'],
       title: orderItem['name'],
       quantity: orderItem['quantity'],
       addOns: orderItem['addOns'],
@@ -99,6 +104,8 @@ class Db {
       OrderItem orderItem = OrderItem(
         id: item.id,
         itemId: item['itemId'],
+        imageURL: item['imageURL'],
+        category: item['category'],
         title: item['name'],
         quantity: item['quantity'],
         addOns: item['addOns'],
@@ -339,5 +346,40 @@ class Db {
       ctgItems[item.category]!.add(item);
     }
     return ctgItems;
+  }
+
+  Future<List<Item>> getProductItems() async {
+    final firestore = FirebaseFirestore.instance;
+    List<Item> result = [];
+
+    final restaurantSnapshot = await firestore.collection('Restaurants').get();
+    for (var doc in restaurantSnapshot.docs) {
+      String restaurantId = doc.id;
+
+      final document = await FirebaseFirestore.instance
+          .collection('Restaurants')
+          .doc(restaurantId)
+          .collection('Items')
+          .get();
+      List<Item> items = [];
+      for (var item in document.docs) {
+        items.add(
+          Item(
+            resId: restaurantId,
+            itemId: item.id,
+            name: item['name'],
+            price: item['price'],
+            desc: item['desc'],
+            imageURL: item['ImageURL'],
+            category: item['category'],
+            addOns: item['addOns'],
+          ),
+        );
+      }
+
+      result.addAll(items);
+    }
+
+    return result;
   }
 }

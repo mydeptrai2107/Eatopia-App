@@ -174,6 +174,10 @@ class _CurrentOrderState extends State<CurrentOrder> {
                           restId: orders[index]['orderItems'][index2]['restId'],
                           itemId: orders[index]['orderItems'][index2]['itemId'],
                           id: '',
+                          imageURL: orders[index]['orderItems'][index2]
+                              ['imageURL'],
+                          category: orders[index]['orderItems'][index2]
+                              ['category'],
                           title: orders[index]['orderItems'][index2]['title'],
                           spcInstr: orders[index]['orderItems'][index2]
                               ['spcInstr'],
@@ -218,6 +222,8 @@ class _CurrentOrderState extends State<CurrentOrder> {
                               restId: c['restId'],
                               itemId: c['itemId'],
                               id: '',
+                              imageURL: c['imageURL'],
+                              category: c['category'],
                               title: c['title'],
                               spcInstr: c['spcInstr'],
                               quantity: c['quantity'],
@@ -477,6 +483,10 @@ class _PastOrderState extends State<PastOrder> {
                           restId: orders[index]['orderItems'][index2]['restId'],
                           itemId: orders[index]['orderItems'][index2]['itemId'],
                           id: '',
+                          imageURL: orders[index]['orderItems'][index2]
+                              ['imageURL'],
+                          category: orders[index]['orderItems'][index2]
+                              ['category'],
                           title: orders[index]['orderItems'][index2]['title'],
                           spcInstr: orders[index]['orderItems'][index2]
                               ['spcInstr'],
@@ -522,6 +532,8 @@ class _PastOrderState extends State<PastOrder> {
                               itemId: c['itemId'],
                               id: '',
                               title: c['title'],
+                              imageURL: c['imageURL'],
+                              category: c['category'],
                               spcInstr: c['spcInstr'],
                               quantity: c['quantity'],
                               basePrice: c['basePrice'],

@@ -132,7 +132,7 @@ class _EditItemPageState extends State<EditItemPage> {
                         },
                         emailController: itemNameController,
                         boxH: 100,
-                        primaryColor: appGreen),
+                        primaryColor: colorPrimary),
                     const SizedBox(height: 20),
                     const Align(
                       alignment: Alignment.centerLeft,
@@ -150,17 +150,17 @@ class _EditItemPageState extends State<EditItemPage> {
                       maxLength: 80,
                       decoration: InputDecoration(
                         border: OutlineInputBorder(
-                          borderSide: BorderSide(color: appGreen),
+                          borderSide: BorderSide(color: colorPrimary),
                           borderRadius:
                               const BorderRadius.all(Radius.circular(10)),
                         ),
                         enabledBorder: OutlineInputBorder(
-                          borderSide: BorderSide(color: appGreen),
+                          borderSide: BorderSide(color: colorPrimary),
                           borderRadius:
                               const BorderRadius.all(Radius.circular(10)),
                         ),
                         focusedBorder: OutlineInputBorder(
-                          borderSide: BorderSide(color: appGreen),
+                          borderSide: BorderSide(color: colorPrimary),
                           borderRadius:
                               const BorderRadius.all(Radius.circular(10)),
                         ),
@@ -180,7 +180,7 @@ class _EditItemPageState extends State<EditItemPage> {
                       inputType: TextInputType.number,
                       emailController: priceController,
                       boxH: 100,
-                      primaryColor: appGreen,
+                      primaryColor: colorPrimary,
                       hintText: '',
                       labelText: '',
                       validator: priceValidator,
@@ -301,7 +301,7 @@ class _EditItemPageState extends State<EditItemPage> {
                       child: ElevatedButton(
                         style: ButtonStyle(
                           backgroundColor:
-                              WidgetStateProperty.all<Color>(appGreen),
+                              WidgetStateProperty.all<Color>(colorPrimary),
                           fixedSize: WidgetStateProperty.all<Size>(Size(
                               MediaQuery.of(context).size.width / 3,
                               MediaQuery.of(context).size.height / 18)),

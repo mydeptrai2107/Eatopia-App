@@ -1,9 +1,11 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:eatopia/utilities/cache_manger.dart';
 import 'package:eatopia/utilities/custom_shimmer.dart';
+import 'package:eatopia/utilities/formatter.dart';
 import 'package:flutter/material.dart';
 
 class Item {
+  String? resId;
   String name;
   String imageURL;
   double price;
@@ -12,14 +14,16 @@ class Item {
   String itemId;
   Map<String, dynamic> addOns;
 
-  Item(
-      {required this.itemId,
-      required this.name,
-      required this.imageURL,
-      required this.price,
-      required this.desc,
-      required this.category,
-      required this.addOns});
+  Item({
+    this.resId,
+    required this.itemId,
+    required this.name,
+    required this.imageURL,
+    required this.price,
+    required this.desc,
+    required this.category,
+    required this.addOns,
+  });
 
   Widget buildItemCard() {
     return Container(
@@ -32,7 +36,7 @@ class Item {
             color: Colors.grey.withAlpha(50),
             spreadRadius: 1,
             blurRadius: 1,
-            offset: const Offset(2, 3), // changes position of shadow
+            offset: const Offset(2, 3),
           ),
         ],
         borderRadius: BorderRadius.circular(10),
@@ -61,7 +65,7 @@ class Item {
                 ),
                 const Spacer(),
                 Text(
-                  'RS. ${price.toInt()}',
+                  Formatter.formatCurrency(price.toInt()),
                   style: const TextStyle(
                     fontSize: 16,
                     fontFamily: 'ubuntu-bold',

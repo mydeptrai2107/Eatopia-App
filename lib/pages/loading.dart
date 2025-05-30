@@ -32,7 +32,7 @@ class _LoadingScreenState extends State<LoadingScreen> {
               height: MediaQuery.of(context).size.height / 4),
           const SizedBox(height: 20),
           SpinKitThreeBounce(
-            color: appGreen,
+            color: colorPrimary,
             size: MediaQuery.of(context).size.width / 50 +
                 MediaQuery.of(context).size.height / 40,
           ),
