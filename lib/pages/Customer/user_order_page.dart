@@ -79,6 +79,10 @@ class _CurrentOrderState extends State<CurrentOrder> {
   List<DocumentSnapshot> orders = [];
 
   void getOrders() async {
+    if (AuthServices().auth.currentUser == null) {
+      orders = [];
+      return;
+    }
     final String uid = AuthServices().auth.currentUser!.uid;
     final QuerySnapshot querySnapshot = await FirebaseFirestore.instance
         .collection('Customers')

@@ -1,7 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:eatopia/services/auth_services.dart';
 import 'package:eatopia/services/db.dart';
+import 'package:eatopia/utilities/colours.dart';
 import 'package:eatopia/utilities/custom_shimmer.dart';
+import 'package:eatopia/utilities/formatter.dart';
 import 'package:eatopia/utilities/order_item.dart';
 import 'package:flutter/material.dart';
 
@@ -16,30 +18,57 @@ class _ResOrdersState extends State<ResOrders> {
   bool isChanged = true;
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: MediaQuery.of(context).size.height,
-      width: MediaQuery.of(context).size.width,
-      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-      child: SingleChildScrollView(
-        child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-          const Text(
-            'Đơn hàng hiện tại',
-            style: TextStyle(fontFamily: 'ubuntu-bold', fontSize: 20),
+    return DefaultTabController(
+      initialIndex: 0,
+      length: 2,
+      child: Scaffold(
+        appBar: AppBar(
+          title: Text("Đơn hàng"),
+        ),
+        body: Container(
+          height: MediaQuery.of(context).size.height,
+          width: MediaQuery.of(context).size.width,
+          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              TabBar(
+                labelColor: colorPrimary,
+                indicatorColor: colorPrimary,
+                tabs: [
+                  Tab(
+                    child: Text(
+                      'Đang diễn ra',
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                  Tab(
+                    child: Text(
+                      'Lịch sử',
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              Expanded(
+                child: TabBarView(
+                  children: [
+                    CurrentOrder(onTap: () {
+                      setState(() {
+                        isChanged = !isChanged;
+                      });
+                    }),
+                    PastOrder(),
+                  ],
+                ),
+              ),
+            ],
           ),
-          const SizedBox(height: 10),
-          CurrentOrder(onTap: () {
-            setState(() {
-              isChanged = !isChanged;
-            });
-          }),
-          const SizedBox(height: 20),
-          const Text(
-            'Đơn đặt hàng trước đây',
-            style: TextStyle(fontFamily: 'ubuntu-bold', fontSize: 20),
-          ),
-          const SizedBox(height: 10),
-          const PastOrder(),
-        ]),
+        ),
       ),
     );
   }
@@ -99,38 +128,23 @@ class _CurrentOrderState extends State<CurrentOrder> {
                   : orders[index]['status'] as String;
               if (orders.isEmpty) {
                 return Container(
-                    height: 50,
-                    decoration: BoxDecoration(
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.grey.withAlpha(50),
-                          spreadRadius: 1,
-                          blurRadius: 1,
-                          offset:
-                              const Offset(2, 3), // changes position of shadow
-                        ),
-                      ],
-                      borderRadius: BorderRadius.circular(10),
-                      color: Colors.white,
-                    ),
-                    child: const Center(
-                        child: Text(
+                  height: 50,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
+                    color: Colors.white,
+                  ),
+                  child: const Center(
+                    child: Text(
                       'Không có đơn hàng hiện tại!',
                       style: TextStyle(fontSize: 20),
-                    )));
+                    ),
+                  ),
+                );
               }
               return Container(
                 padding: const EdgeInsets.all(10),
                 margin: const EdgeInsets.symmetric(vertical: 5),
                 decoration: BoxDecoration(
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.grey.withAlpha(50),
-                      spreadRadius: 1,
-                      blurRadius: 1,
-                      offset: const Offset(2, 3), // changes position of shadow
-                    ),
-                  ],
                   borderRadius: BorderRadius.circular(10),
                   color: Colors.white,
                 ),
@@ -139,30 +153,33 @@ class _CurrentOrderState extends State<CurrentOrder> {
                   children: [
                     const Text(
                       'Chi tiết khách hàng',
-                      style: TextStyle(fontFamily: 'ubuntu-bold', fontSize: 20),
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                     const SizedBox(height: 10),
                     Text(
                       'Tên: ${userNames[index]}',
-                      style:
-                          const TextStyle(fontFamily: 'ubuntu', fontSize: 15),
+                      style: const TextStyle(fontSize: 14),
                     ),
                     const SizedBox(height: 10),
                     Text(
                       'Địa chỉ: ${orders[index]['userAddress'] ?? 'Not Provided'}',
-                      style:
-                          const TextStyle(fontFamily: 'ubuntu', fontSize: 15),
+                      style: const TextStyle(fontSize: 14),
                     ),
                     const SizedBox(height: 10),
                     Text(
                       'Số điện thoại: ${orders[index]['phone'] ?? 'Not Provided'}',
-                      style:
-                          const TextStyle(fontFamily: 'ubuntu', fontSize: 15),
+                      style: const TextStyle(fontSize: 14),
                     ),
                     const SizedBox(height: 10),
                     const Text(
                       'Tổng quan đơn hàng',
-                      style: TextStyle(fontFamily: 'ubuntu-bold', fontSize: 20),
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                     const SizedBox(height: 10),
                     ListView.builder(
@@ -188,67 +205,75 @@ class _CurrentOrderState extends State<CurrentOrder> {
                           addOns: orders[index]['orderItems'][index2]['addOns'],
                         );
                         return ListTile(
+                          leading: Image.network(
+                            orderItem.imageURL,
+                            width: 40,
+                            height: 40,
+                          ),
                           title: Text(
                             orderItem.title,
-                            style: const TextStyle(
-                                fontFamily: 'ubuntu', fontSize: 15),
+                            style: const TextStyle(fontSize: 15),
                           ),
                           subtitle: Text(
-                            'Rs. ${orderItem.totalPrice}',
-                            style: const TextStyle(
-                                fontFamily: 'ubuntu', fontSize: 15),
+                            Formatter.formatCurrency(orderItem.totalPrice),
+                            style: const TextStyle(fontSize: 15),
                           ),
                           trailing: Text(
                             'x${orderItem.quantity}',
-                            style: const TextStyle(
-                                fontFamily: 'ubuntu', fontSize: 15),
+                            style: const TextStyle(fontSize: 15),
                           ),
                         );
                       },
                     ),
-                    const Divider(),
-                    const SizedBox(height: 10),
+                    const Divider(height: 15),
                     Row(
                       children: [
                         const Text(
                           'Tổng',
                           style: TextStyle(
-                              fontFamily: 'ubuntu-bold', fontSize: 20),
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
                         const Spacer(),
                         Text(
-                          'Rs. ${orders[index]['orderItems'].fold(0.0, (p, c) {
-                            OrderItem orderItem = OrderItem(
-                              restId: c['restId'],
-                              itemId: c['itemId'],
-                              id: '',
-                              imageURL: c['imageURL'],
-                              category: c['category'],
-                              title: c['title'],
-                              spcInstr: c['spcInstr'],
-                              quantity: c['quantity'],
-                              basePrice: c['basePrice'],
-                              addOns: c['addOns'],
-                            );
-                            return p + orderItem.totalPrice;
-                          })}',
-                          style: const TextStyle(
-                              fontFamily: 'ubuntu-bold', fontSize: 20),
+                          Formatter.formatCurrency(
+                            orders[index]['orderItems'].fold(
+                              0.0,
+                              (p, c) {
+                                OrderItem orderItem = OrderItem(
+                                  restId: c['restId'],
+                                  itemId: c['itemId'],
+                                  id: '',
+                                  imageURL: c['imageURL'],
+                                  category: c['category'],
+                                  title: c['title'],
+                                  spcInstr: c['spcInstr'],
+                                  quantity: c['quantity'],
+                                  basePrice: c['basePrice'],
+                                  addOns: c['addOns'],
+                                );
+                                return p + orderItem.totalPrice;
+                              },
+                            ),
+                          ),
+                          style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                            color: colorPrimary,
+                          ),
                         ),
                       ],
                     ),
-                    const SizedBox(height: 10),
-                    const Divider(),
+                    const Divider(height: 15),
                     const Text(
                       'Trạng thái:',
                       style: TextStyle(
-                        fontSize: 20,
-                        fontFamily: 'ubuntu-bold',
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
                       ),
                     ),
-                    const SizedBox(
-                      width: 10,
-                    ),
+                    const SizedBox(width: 5),
                     Container(
                       padding: const EdgeInsets.symmetric(horizontal: 10),
                       decoration: BoxDecoration(
@@ -256,6 +281,11 @@ class _CurrentOrderState extends State<CurrentOrder> {
                         borderRadius: BorderRadius.circular(10),
                       ),
                       child: DropdownButtonFormField(
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                          color: colorPrimary,
+                        ),
                         onChanged: (value) async {
                           //Show a Dialog Box to Confirm
                           bool? result = await showDialog(
@@ -270,12 +300,13 @@ class _CurrentOrderState extends State<CurrentOrder> {
                                         onPressed: () {
                                           Navigator.pop(context, false);
                                         },
-                                        child: const Text('No')),
+                                        child: const Text('Không')),
                                     TextButton(
-                                        onPressed: () {
-                                          Navigator.pop(context, true);
-                                        },
-                                        child: const Text('Yes')),
+                                      onPressed: () {
+                                        Navigator.pop(context, true);
+                                      },
+                                      child: const Text('Có'),
+                                    ),
                                   ],
                                 );
                               });
@@ -310,46 +341,57 @@ class _CurrentOrderState extends State<CurrentOrder> {
                         }).toList(),
                       ),
                     ),
-                    const SizedBox(height: 10),
+                    const SizedBox(height: 5),
                     ElevatedButton(
-                        onPressed: () async {
-                          //Show a Dialog Box to Confirm
-                          bool? result = await showDialog(
-                            context: context,
-                            builder: (context) {
-                              return AlertDialog(
-                                title: const Text('Xác nhận'),
-                                content: const Text(
-                                    'Bạn có chắc chắn muốn hủy đơn hàng'),
-                                actions: [
-                                  TextButton(
-                                      onPressed: () {
-                                        Navigator.pop(context, false);
-                                      },
-                                      child: const Text('No')),
-                                  TextButton(
-                                      onPressed: () async {
-                                        Navigator.pop(context, true);
-                                      },
-                                      child: const Text('Yes')),
-                                ],
-                              );
-                            },
-                          );
-
-                          if (result == null || !result) {
-                            return;
-                          } else {
-                            await Db().updateOrderStatus(
-                              'cancelled',
-                              orders[index]['restId'],
-                              orders[index]['custId'],
-                              orders[index].id,
+                      style: ButtonStyle(
+                        backgroundColor: WidgetStatePropertyAll(Colors.red),
+                      ),
+                      onPressed: () async {
+                        //Show a Dialog Box to Confirm
+                        bool? result = await showDialog(
+                          context: context,
+                          builder: (context) {
+                            return AlertDialog(
+                              title: const Text('Xác nhận'),
+                              content: const Text(
+                                'Bạn có chắc chắn muốn hủy đơn hàng',
+                              ),
+                              actions: [
+                                TextButton(
+                                    onPressed: () {
+                                      Navigator.pop(context, false);
+                                    },
+                                    child: const Text('No')),
+                                TextButton(
+                                    onPressed: () async {
+                                      Navigator.pop(context, true);
+                                    },
+                                    child: const Text('Yes')),
+                              ],
                             );
-                            widget.onTap();
-                          }
-                        },
-                        child: const Text('Hủy')),
+                          },
+                        );
+
+                        if (result == null || !result) {
+                          return;
+                        } else {
+                          await Db().updateOrderStatus(
+                            'cancelled',
+                            orders[index]['restId'],
+                            orders[index]['custId'],
+                            orders[index].id,
+                          );
+                          widget.onTap();
+                        }
+                      },
+                      child: const Text(
+                        'Hủy',
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white,
+                        ),
+                      ),
+                    ),
                   ],
                 ),
               );
@@ -408,38 +450,31 @@ class _PastOrderState extends State<PastOrder> {
             itemBuilder: (context, index) {
               if (orders.isEmpty) {
                 return Container(
-                    height: 50,
-                    decoration: BoxDecoration(
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.grey.withAlpha(50),
-                          spreadRadius: 1,
-                          blurRadius: 1,
-                          offset:
-                              const Offset(2, 3), // changes position of shadow
-                        ),
-                      ],
-                      borderRadius: BorderRadius.circular(10),
-                      color: Colors.white,
-                    ),
-                    child: const Center(
-                        child: Text(
-                      'No Past Orders!',
+                  height: 50,
+                  decoration: BoxDecoration(
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.grey.withAlpha(50),
+                        spreadRadius: 1,
+                        blurRadius: 1,
+                        offset: const Offset(2, 3),
+                      ),
+                    ],
+                    borderRadius: BorderRadius.circular(10),
+                    color: Colors.white,
+                  ),
+                  child: const Center(
+                    child: Text(
+                      'Không có đơn hàng nào',
                       style: TextStyle(fontSize: 20),
-                    )));
+                    ),
+                  ),
+                );
               }
               return Container(
                 padding: const EdgeInsets.all(10),
                 margin: const EdgeInsets.symmetric(vertical: 5),
                 decoration: BoxDecoration(
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.grey.withAlpha(50),
-                      spreadRadius: 1,
-                      blurRadius: 1,
-                      offset: const Offset(2, 3), // changes position of shadow
-                    ),
-                  ],
                   borderRadius: BorderRadius.circular(10),
                   color: Colors.white,
                 ),
@@ -447,33 +482,36 @@ class _PastOrderState extends State<PastOrder> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     const Text(
-                      'Customer Details',
-                      style: TextStyle(fontFamily: 'ubuntu-bold', fontSize: 20),
+                      'Chi tiết khách hàng',
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                     const SizedBox(height: 10),
                     Text(
                       'Name: ${userNames[index]}',
-                      style:
-                          const TextStyle(fontFamily: 'ubuntu', fontSize: 15),
+                      style: const TextStyle(fontSize: 14),
                     ),
                     const SizedBox(height: 10),
                     Text(
                       'Address: ${orders[index]['userAddress'] ?? 'Not Provided'}',
-                      style:
-                          const TextStyle(fontFamily: 'ubuntu', fontSize: 15),
+                      style: const TextStyle(fontSize: 14),
                     ),
                     const SizedBox(height: 10),
                     Text(
                       'Phone: ${orders[index]['phone'] ?? 'Not Provided'}',
-                      style:
-                          const TextStyle(fontFamily: 'ubuntu', fontSize: 15),
+                      style: const TextStyle(fontSize: 14),
                     ),
                     const SizedBox(height: 10),
                     const Text(
-                      'Order Summary',
-                      style: TextStyle(fontFamily: 'ubuntu-bold', fontSize: 20),
+                      'Tóm tắt đơn hàng',
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
-                    const SizedBox(height: 10),
+                    const SizedBox(height: 5),
                     ListView.builder(
                       shrinkWrap: true,
                       physics: const NeverScrollableScrollPhysics(),
@@ -497,73 +535,83 @@ class _PastOrderState extends State<PastOrder> {
                           addOns: orders[index]['orderItems'][index2]['addOns'],
                         );
                         return ListTile(
+                          leading: Image.network(
+                            orderItem.imageURL,
+                            width: 40,
+                            height: 40,
+                          ),
                           title: Text(
                             orderItem.title,
-                            style: const TextStyle(
-                                fontFamily: 'ubuntu', fontSize: 15),
+                            style: const TextStyle(fontSize: 14),
                           ),
                           subtitle: Text(
-                            'Rs. ${orderItem.totalPrice}',
-                            style: const TextStyle(
-                                fontFamily: 'ubuntu', fontSize: 15),
+                            Formatter.formatCurrency(orderItem.totalPrice),
+                            style: const TextStyle(fontSize: 14),
                           ),
                           trailing: Text(
                             'x${orderItem.quantity}',
-                            style: const TextStyle(
-                                fontFamily: 'ubuntu', fontSize: 15),
+                            style: const TextStyle(fontSize: 14),
                           ),
                         );
                       },
                     ),
-                    const Divider(),
-                    const SizedBox(height: 10),
+                    const Divider(height: 15),
                     Row(
                       children: [
                         const Text(
                           'Total',
                           style: TextStyle(
-                              fontFamily: 'ubuntu-bold', fontSize: 20),
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
                         const Spacer(),
                         Text(
-                          'Rs. ${orders[index]['orderItems'].fold(0.0, (p, c) {
-                            OrderItem orderItem = OrderItem(
-                              restId: c['restId'],
-                              itemId: c['itemId'],
-                              id: '',
-                              title: c['title'],
-                              imageURL: c['imageURL'],
-                              category: c['category'],
-                              spcInstr: c['spcInstr'],
-                              quantity: c['quantity'],
-                              basePrice: c['basePrice'],
-                              addOns: c['addOns'],
-                            );
-                            return p + orderItem.totalPrice;
-                          })}',
-                          style: const TextStyle(
-                              fontFamily: 'ubuntu-bold', fontSize: 20),
+                          Formatter.formatCurrency(
+                            orders[index]['orderItems'].fold(
+                              0.0,
+                              (p, c) {
+                                OrderItem orderItem = OrderItem(
+                                  restId: c['restId'],
+                                  itemId: c['itemId'],
+                                  id: '',
+                                  title: c['title'],
+                                  imageURL: c['imageURL'],
+                                  category: c['category'],
+                                  spcInstr: c['spcInstr'],
+                                  quantity: c['quantity'],
+                                  basePrice: c['basePrice'],
+                                  addOns: c['addOns'],
+                                );
+                                return p + orderItem.totalPrice;
+                              },
+                            ),
+                          ),
+                          style: TextStyle(
+                            color: colorPrimary,
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
                       ],
                     ),
-                    const SizedBox(height: 10),
-                    const Divider(),
+                    const Divider(height: 15),
                     Row(
                       children: [
                         const Text(
                           'Status:',
                           style: TextStyle(
-                            fontSize: 20,
-                            fontFamily: 'ubuntu-bold',
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
                           ),
                         ),
-                        const SizedBox(
-                          width: 10,
-                        ),
+                        const SizedBox(width: 5),
                         Text(
                           orders[index]['status'],
-                          style: const TextStyle(
-                            fontSize: 20,
+                          style: TextStyle(
+                            color: Colors.green,
+                            fontSize: 16,
+                            fontWeight: FontWeight.w900,
                           ),
                         ),
                       ],
